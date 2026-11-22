@@ -184,7 +184,7 @@ ol.steps > li {
   counter-increment: step;
   display: grid;
   grid-template-columns: 2rem minmax(0, 1fr);
-  gap: 12px;
+  gap: 6px 12px;
   margin: 0;
 }
 ol.steps > li::before {
@@ -198,6 +198,10 @@ ol.steps > li::before {
   color: var(--paper-hi);
   font: 700 0.8125rem/1 var(--font-mono);
 }
+/* Everything in a step (its paragraph and any sub-list) stays in the text column beside the number. */
+ol.steps > li > * { grid-column: 2; }
+ol.steps > li > p { margin-bottom: 0; }
+ol.steps > li > ul { margin: 0; }
 
 /* ---------- hardware vocabulary ---------- */
 .cap {
