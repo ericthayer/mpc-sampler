@@ -149,12 +149,29 @@ body {
   min-block-size: 30px;
   color: #a8a59c;
 }
+/* Icon buttons: square, same height as the text links; the name is in aria-label and the tooltip. */
+.chrome .switch button.icon {
+  justify-content: center;
+  inline-size: 36px;
+  padding: 0;
+}
+.chrome .switch svg {
+  inline-size: 20px;
+  block-size: 20px;
+  fill: currentColor;
+}
+.chrome .switch svg .outline {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
 .chrome .switch button[aria-pressed='true'] {
   background: var(--slab-screen-accent);
   color: #14110a;
 }
 @media (pointer: coarse) {
   .chrome .switch button { min-block-size: 42px; }
+  .chrome .switch button.icon { inline-size: 44px; }
 }
 slab-keys { align-self: center; }
 /* Leave the desk corner for the floating links (see .chrome above). */
