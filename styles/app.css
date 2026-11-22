@@ -79,7 +79,7 @@ body {
   overscroll-behavior: none;
 }
 
-/* Help links above the instrument: quiet so the faceplate stays the focus. */
+/* View switch and help buttons above the instrument: quiet so the faceplate stays the focus. */
 .chrome {
   display: flex;
   flex-wrap: wrap;
@@ -133,8 +133,6 @@ body {
     inset: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) auto auto;
     inline-size: auto;
     margin: 0;
-    flex-direction: column;
-    align-items: flex-end;
   }
 }
 
@@ -149,29 +147,33 @@ body {
   min-block-size: 30px;
   color: #a8a59c;
 }
-/* Icon buttons: square, same height as the text links; the name is in aria-label and the tooltip. */
-.chrome .switch button.icon {
+/* Icon buttons: square; each one's name is in aria-label and its tooltip. */
+.chrome .icon {
   justify-content: center;
   inline-size: 36px;
   padding: 0;
 }
-.chrome .switch svg {
+.chrome svg {
   inline-size: 20px;
   block-size: 20px;
   fill: currentColor;
 }
-.chrome .switch svg .outline {
+.chrome svg .outline,
+.chrome svg.line {
   fill: none;
   stroke: currentColor;
   stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
+.chrome svg .dot { fill: currentColor; }
 .chrome .switch button[aria-pressed='true'] {
   background: var(--slab-screen-accent);
   color: #14110a;
 }
 @media (pointer: coarse) {
   .chrome .switch button { min-block-size: 42px; }
-  .chrome .switch button.icon { inline-size: 44px; }
+  .chrome .icon { inline-size: 44px; }
 }
 slab-keys { align-self: center; }
 /* Leave the desk corner for the floating links (see .chrome above). */

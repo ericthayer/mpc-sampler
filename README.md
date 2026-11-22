@@ -47,7 +47,7 @@ immediately. No audio files ship with the app; the kit is generated from maths a
 ## Help and tutorial
 
 - **Guide** (`help.html`): quick start, six hands-on lessons, drum patterns to enter in step edit, a full controls reference, troubleshooting, and curated links for learning production and finding legally usable samples.
-- **Guided tour**: a nine-step walkthrough that highlights each control and marks each step done when you've done it. Steps stay on screen until you press Next. It opens on first visit (from the welcome dialog), from **Tour** above the instrument, from the Project page, or with `index.html#tour`.
+- **Guided tour**: a nine-step walkthrough that highlights each control and marks each step done when you've done it. Steps stay on screen until you press Next. It opens on first visit (from the welcome dialog), from the compass button above the instrument, from the Project page, or with `index.html#tour`.
 - **Shortcuts**: press `?` in the app.
 
 ## Controls
