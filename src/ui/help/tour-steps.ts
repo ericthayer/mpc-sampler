@@ -16,7 +16,7 @@ export interface TourStep {
   /** Runs once when the step opens. */
   enter?: (app: App) => void;
   begin?: (app: App) => number;
-  /** When it returns true the step is complete and the tour moves on. Omit for read-only steps. */
+  /** When it returns true the step is marked done; the player still presses Next. Omit for read-only steps. */
   done?: (app: App, progress: TourProgress) => boolean;
 }
 
@@ -26,7 +26,7 @@ const seqEvents = (app: App): number => app.project.state.sequences[app.ui.state
 export const TOUR_STEPS: readonly TourStep[] = [
   {
     title: 'A two-minute tour',
-    body: "You'll play the demo beat, record a part, bend the mix with an effect and load a sound of your own. Each step moves on by itself once you've done it. Press Next to skip one.",
+    body: "You'll play the demo beat, record a part, bend the mix with an effect and load a sound of your own. Each step stays open while you try it and is marked done when you've done it. Press Next to move on, or Skip to pass a step.",
     targets: ['screen'],
   },
   {

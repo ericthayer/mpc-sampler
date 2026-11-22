@@ -47,11 +47,10 @@ const styles = sheet(css`
 
 export type Spotlight = (ids: readonly string[]) => void;
 
-const ADVANCE_MS = 1100;
-
 /**
- * Non-modal coach card. Each step outlines the controls to use and moves on by
- * itself once the player has done what it asks, so the instrument stays playable.
+ * Non-modal coach card. Each step outlines the controls to use and marks itself
+ * done when the player has done what it asks. It stays open until they press Next,
+ * so the instructions remain visible while they play.
  */
 export class SlabTour extends SlabElement {
   #dialog = h('dialog', { 'aria-labelledby': 'tour-title' });
@@ -71,7 +70,6 @@ export class SlabTour extends SlabElement {
   #baseline = 0;
   #hits = 0;
   #complete = false;
-  #timer: ReturnType<typeof setTimeout> | undefined;
   #off: (() => void)[] = [];
 
   constructor() {
@@ -138,7 +136,6 @@ export class SlabTour extends SlabElement {
   }
 
   stop(): void {
-    clearTimeout(this.#timer);
     this.#off.forEach((off) => off());
     this.#off = [];
     this.#spotlight([]);
@@ -148,7 +145,6 @@ export class SlabTour extends SlabElement {
   #go(index: number): void {
     const app = this.#app;
     if (!app) return;
-    clearTimeout(this.#timer);
     this.#index = Math.max(0, Math.min(TOUR_STEPS.length - 1, index));
     const step = this.#step;
     step.enter?.(app);
@@ -163,7 +159,9 @@ export class SlabTour extends SlabElement {
     this.#status.textContent = '';
     this.#back.hidden = this.#index === 0;
     this.#guide.hidden = !this.#last;
+    // A step with a task offers a quiet Skip until it's done; then Next lights up. It never advances on its own.
     this.#next.textContent = this.#last ? 'Finish' : step.done ? 'Skip' : 'Next';
+    this.#next.classList.toggle('primary', !step.done);
     this.#spotlight(step.targets);
     this.#title.focus({ preventScroll: true });
   }
@@ -174,9 +172,9 @@ export class SlabTour extends SlabElement {
     if (!app || this.#complete || !step.done) return;
     if (!step.done(app, { baseline: this.#baseline, hits: this.#hits })) return;
     this.#complete = true;
-    this.#status.textContent = 'Done';
+    this.#status.textContent = "Done. Press Next when you're ready.";
     this.#next.textContent = 'Next';
-    this.#timer = setTimeout(() => this.#go(this.#index + 1), ADVANCE_MS);
+    this.#next.classList.add('primary');
   }
 }
 
