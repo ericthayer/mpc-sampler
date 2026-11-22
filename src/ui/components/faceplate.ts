@@ -1,4 +1,5 @@
 /** The faceplate's buttons: what each is called, its SHIFT function, and how its cap looks. */
+import type { App } from '../../app/context.js';
 import type { ButtonId } from '../../app/controller.js';
 import { h } from '../dom.js';
 import './slab-button.js';
@@ -44,4 +45,17 @@ export const TRANSPORT_BUTTONS: ButtonSpec[] = [
 
 export function button(spec: ButtonSpec): SlabButton {
   return h('slab-button', { id: spec.id, label: spec.label, sub: spec.sub, tone: spec.tone, led: spec.led, toggle: spec.toggle }) as SlabButton;
+}
+
+/** One-line explanation of the active pad mode, shown on the strip under the pads. */
+export function modeHint(app: App): string {
+  const ui = app.ui.state;
+  if (ui.shift || ui.shiftLatched) return 'SHIFT: pads and buttons run the function printed beneath them.';
+  if (ui.copyStage === 'source') return 'COPY: hit the pad to copy from.';
+  if (ui.copyStage === 'dest') return 'COPY: hit the pad to copy to.';
+  if (ui.eraseMode) return ui.playing ? 'ERASE: hold a pad to wipe its notes as they pass.' : 'ERASE: hit a pad to clear its notes from this sequence.';
+  if (ui.muteMode) return 'MUTE: hit pads to silence or restore them. Lit pads are audible.';
+  if (ui.levels16) return `16 LEVELS: the pads play the selected pad at 16 ${app.project.state.settings.levelsType === 'tune' ? 'pitches' : 'velocities'}.`;
+  if (ui.noteRepeat) return 'NOTE REPEAT: hold a pad to retrigger it on the Time Correct grid.';
+  return '';
 }

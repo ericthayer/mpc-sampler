@@ -1,4 +1,5 @@
 import type { App } from './context.js';
+import { requestHelp } from './help-events.js';
 import type { ButtonId, Controller } from './controller.js';
 
 /** Computer keys laid out like the pad grid: top row of keys = top row of pads. */
@@ -36,6 +37,14 @@ function keyboardFocused(event: KeyboardEvent): boolean {
 export function bindKeyboard(app: App, controller: Controller): void {
   window.addEventListener('keydown', (event) => {
     if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || isTyping(event)) return;
+    // A modal help dialog owns the keyboard; Escape closes it natively.
+    if (document.querySelector('slab-help[open]')) return;
+    if (event.key === '?') {
+      event.preventDefault();
+      controller.release('shift', false);
+      requestHelp('shortcuts');
+      return;
+    }
     if (event.key === 'Shift') {
       if (!event.repeat) controller.press('shift');
       return;

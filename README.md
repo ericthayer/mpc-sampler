@@ -43,6 +43,12 @@ Microphone, MIDI, install and offline support need HTTPS or `localhost`.
 The app opens with a synthesised factory kit and a demo beat, so PLAY makes sound
 immediately. No audio files ship with the app; the kit is generated from maths at boot.
 
+## Help and tutorial
+
+- **Guide** (`help.html`): quick start, six hands-on lessons, drum patterns to enter in step edit, a full controls reference, troubleshooting, and curated links for learning production and finding legally usable samples.
+- **Guided tour**: a nine-step walkthrough that highlights each control and moves on once you've done what it asks. It opens on first visit (from the welcome dialog), from **Tour** above the instrument, from the Project page, or with `index.html#tour`.
+- **Shortcuts**: press `?` in the app.
+
 ## Controls
 
 **SHIFT** works held (multi-touch or the keyboard's Shift key) or tapped: a quick
@@ -102,7 +108,9 @@ src/
   app/       Controller (gestures → actions), actions, keyboard map
   ui/        Web Components (shadow DOM, constructable stylesheets)
              screen/pages — one module per display page
+             help/ — guided-tour steps; slab-tour / slab-help components
 styles/app.css   Design tokens (custom properties) and page chrome
+help.html        The guide (static; styles/help.css)
 sw.js            Offline cache (network-first)
 ```
 
@@ -140,6 +148,6 @@ on iOS, audio follows the ring/silent switch like any web page.
 ## Limits worth knowing
 
 - Recording stops at 60 seconds per take.
-- Pad FX are live-only; a bounce contains the sequence and the Knob FX, not pad-FX moves. Resample to print them.
+- Pad FX and lo-fi are live-only; a bounce contains the sequence plus filter, delay, reverb and compressor. Resample to print the rest.
 - Time signature is fixed at 4/4.
 - Undo covers sequence edits, not pad or sample edits (destructive sample edits keep the original in the pool until reload).

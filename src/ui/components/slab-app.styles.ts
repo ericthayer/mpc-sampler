@@ -189,6 +189,19 @@ export const appStyles = sheet(css`
     text-align: center;
   }
 
+  /* Guided-tour highlight: only present while the tour points at a control. */
+  [coach] {
+    outline: max(3px, calc(var(--u) * 0.45)) solid var(--slab-led-amber, #ffb02e);
+    outline-offset: max(3px, calc(var(--u) * 0.5));
+    animation: coach 0.9s ease-in-out infinite alternate;
+  }
+  @keyframes coach {
+    to { outline-color: rgb(255 176 46 / 0.15); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [coach] { animation: none; }
+  }
+
   /* Touch screens get taller button caps. */
   @media (pointer: coarse) {
     slab-button::part(cap) { min-block-size: 44px; }

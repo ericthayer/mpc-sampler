@@ -79,6 +79,63 @@ body {
   overscroll-behavior: none;
 }
 
+/* Help links above the instrument: quiet so the faceplate stays the focus. */
+.chrome {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  inline-size: min(100%, 76rem);
+  margin: 0 auto 8px;
+}
+.chrome a,
+.chrome button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-block-size: 32px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  background: none;
+  color: #a8a59c;
+  font: 700 0.6875rem/1 var(--slab-font-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+.chrome a:hover,
+.chrome button:hover {
+  border-color: #4a4843;
+  color: var(--slab-body-hi);
+}
+.chrome :focus-visible {
+  outline: 2px solid var(--slab-focus);
+  outline-offset: 2px;
+}
+.chrome kbd {
+  padding: 1px 5px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font: inherit;
+  letter-spacing: 0;
+}
+@media (pointer: coarse) {
+  .chrome a,
+  .chrome button { min-block-size: 44px; }
+}
+/* With desk space beside the faceplate, float the links in the corner so the instrument keeps its full height. */
+@media (min-width: 62rem) {
+  .chrome {
+    position: fixed;
+    inset: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) auto auto;
+    inline-size: auto;
+    margin: 0;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
 slab-app:not(:defined) {
   display: block;
   min-block-size: 60vh;

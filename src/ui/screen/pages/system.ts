@@ -1,5 +1,6 @@
 import { bounceToWav, exportProject, newProject, openProjectFile, shareBounce } from '../../../app/actions/project.js';
 import type { App } from '../../../app/context.js';
+import { requestHelp } from '../../../app/help-events.js';
 import type { FaderTarget } from '../../../core/types.js';
 import { canShareFiles } from '../../../io/files.js';
 import { MidiInput } from '../../../io/midi.js';
@@ -105,6 +106,7 @@ function projectChips(app: App): Chip[] {
     { label: 'Bounce WAV', run: () => void bounceToWav(app, app.ui.state.songMode) },
   ];
   if (canShareFiles()) chips.push({ label: 'Share', run: () => void shareBounce(app) });
+  chips.push({ label: 'Tutorial', run: () => requestHelp('tour') }, { label: 'Guide', run: () => requestHelp('guide') });
   chips.push(confirmChip(app, 'New', () => newProject(app, false)), confirmChip(app, 'Demo', () => newProject(app, true)));
   if (app.ui.state.canInstall) {
     chips.push({

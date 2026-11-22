@@ -9,7 +9,7 @@ import type { PadLight } from '../screen/page.js';
 import { faderTargetLabel } from '../screen/pages/system.js';
 import { sharedStyles } from '../styles/shared.js';
 import { appStyles } from './slab-app.styles.js';
-import { button, MODE_BUTTONS, PLAY_BUTTONS, TRANSPORT_BUTTONS, UTILITY_BUTTONS, type ButtonSpec } from './faceplate.js';
+import { button, modeHint, MODE_BUTTONS, PLAY_BUTTONS, TRANSPORT_BUTTONS, UTILITY_BUTTONS, type ButtonSpec } from './faceplate.js';
 import type { SlabButton } from './slab-button.js';
 import { SlabFader, type FaderInputDetail } from './slab-fader.js';
 import { SlabKnob, type KnobInputDetail, type KnobTurnDetail } from './slab-knob.js';
@@ -25,7 +25,7 @@ export class SlabApp extends SlabElement {
   #app!: App;
   #controller!: Controller;
   #device = h('main', { class: 'device' });
-  #screen = h('slab-screen') as SlabScreen;
+  #screen = h('slab-screen', { id: 'screen' }) as SlabScreen;
   #meter = h('slab-meter') as SlabMeter;
   #volume = h('slab-knob', { id: 'volume', label: 'Main Volume' }) as SlabKnob;
   #wheel = h('slab-knob', { id: 'wheel', label: 'Data', endless: true }) as SlabKnob;
@@ -58,6 +58,15 @@ export class SlabApp extends SlabElement {
 
   disconnectedCallback(): void {
     cancelAnimationFrame(this.#raf);
+  }
+
+  /** Outline controls for the guided tour and bring the first into view. Pass [] to clear. */
+  spotlight(ids: readonly string[]): void {
+    for (const el of this.root.querySelectorAll('[coach]')) el.removeAttribute('coach');
+    const targets = ids.map((id) => this.root.getElementById(id)).filter((el): el is HTMLElement => el !== null);
+    for (const el of targets) el.setAttribute('coach', '');
+    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    targets[0]?.scrollIntoView({ block: 'center', behavior: smooth ? 'smooth' : 'auto' });
   }
 
   #build(): void {
@@ -101,7 +110,7 @@ export class SlabApp extends SlabElement {
       h('h2', { class: 'heading hplay' }, 'Pad Play'),
       h('section', { class: 'group', 'aria-label': 'Pad play' }, ...add(PLAY_BUTTONS)),
       h('section', { class: 'group', 'aria-label': 'Utility' }, ...utility.slice(0, 2), this.#fader, ...utility.slice(2)),
-      h('section', { class: 'pads', 'aria-label': 'Pads' }, ...padCells),
+      h('section', { class: 'pads', id: 'pads', 'aria-label': 'Pads' }, ...padCells),
       h('section', { class: 'group', 'aria-label': 'Data and transport' }, this.#wheel, ...add(TRANSPORT_BUTTONS)),
       h('footer', { class: 'strip' }, this.#hint),
     );
@@ -270,21 +279,10 @@ export class SlabApp extends SlabElement {
     this.#fader.value = this.#controller.faderValue();
     this.#fader.setAttribute('label', `Fader: ${faderTargetLabel(project.settings.faderTarget)}`);
 
-    const hint = ui.message || this.#modeHint() || this.#controller.page.hint;
+    const hint = ui.message || modeHint(app) || this.#controller.page.hint;
     if (this.#hint.textContent !== hint) this.#hint.textContent = hint;
   }
 
-  #modeHint(): string {
-    const ui = this.#app.ui.state;
-    if (ui.shift || ui.shiftLatched) return 'SHIFT: pads and buttons run the function printed beneath them.';
-    if (ui.copyStage === 'source') return 'COPY: hit the pad to copy from.';
-    if (ui.copyStage === 'dest') return 'COPY: hit the pad to copy to.';
-    if (ui.eraseMode) return ui.playing ? 'ERASE: hold a pad to wipe its notes as they pass.' : 'ERASE: hit a pad to clear its notes from this sequence.';
-    if (ui.muteMode) return 'MUTE: hit pads to silence or restore them. Lit pads are audible.';
-    if (ui.levels16) return `16 LEVELS: the pads play the selected pad at 16 ${this.#app.project.state.settings.levelsType === 'tune' ? 'pitches' : 'velocities'}.`;
-    if (ui.noteRepeat) return 'NOTE REPEAT: hold a pad to retrigger it on the Time Correct grid.';
-    return '';
-  }
 }
 
 define('slab-app', SlabApp);

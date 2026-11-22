@@ -1,8 +1,8 @@
 // SLAB/16 offline cache. Plain JS on purpose: it must be served from the site root.
 // Strategy: network-first for everything same-origin, falling back to the cache,
 // so a deploy is picked up immediately and the app still opens with no connection.
-const CACHE = 'slab16-v1';
-const SHELL = ['./', './index.html', './styles/app.css', './manifest.webmanifest', './icons/icon.svg'];
+const CACHE = 'slab16-v2';
+const SHELL = ['./', './index.html', './help.html', './styles/app.css', './styles/help.css', './manifest.webmanifest', './icons/icon.svg'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

@@ -20,15 +20,20 @@ export type ButtonId =
 
 const SHIFT_TAP_MS = 350;
 
-/** Translates hardware gestures (buttons, pads, knobs, wheel, fader) into actions. */
-export class Controller {
+/**
+ * Translates hardware gestures (buttons, pads, knobs, wheel, fader) into actions.
+ * Fires `pad` (detail: in-bank index) whenever the player strikes a pad to make sound.
+ */
+export class Controller extends EventTarget {
   #shiftDownAt = 0;
   #shiftUsed = false;
   #taps: number[] = [];
   /** What each held pad is doing, so its release matches its press even if the mode changes. */
   #downPads = new Map<number, { target: number; page: PageDef | null }>();
 
-  constructor(private readonly app: App) {}
+  constructor(private readonly app: App) {
+    super();
+  }
 
   get page(): PageDef {
     return PAGES[this.app.ui.state.page];
@@ -174,6 +179,7 @@ export class Controller {
     }
 
     hapticTick();
+    this.dispatchEvent(new CustomEvent<number>('pad', { detail: inBank }));
     const page = this.page;
     if (page.padDown?.(app, inBank, velocity)) {
       this.#downPads.set(inBank, { target: -1, page });
