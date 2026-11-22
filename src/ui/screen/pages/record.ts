@@ -2,6 +2,7 @@ import { commitCapture, loadFilesToPad } from '../../../app/actions/samples.js';
 import { absolutePad, padLabel, type App } from '../../../app/context.js';
 import { peaks } from '../../../audio/dsp.js';
 import { MAX_RECORD_SECONDS, Recorder } from '../../../audio/recorder.js';
+import { explain, preflight } from '../../../io/input-access.js';
 import type { InputSource } from '../../../core/types.js';
 import type { SlabWaveform } from '../../components/slab-waveform.js';
 import { h } from '../../dom.js';
@@ -29,17 +30,29 @@ export async function toggleSampling(app: App): Promise<void> {
   }
   if (ui.recorder === 'opening') return;
   const source = app.project.state.settings.inputSource;
-  if (!Recorder.supports(source)) return app.say(`${SOURCE_LABELS[SOURCES.indexOf(source)]} is not available here`);
+  const fail = (reason: string): void => {
+    app.ui.update((s) => {
+      s.recorder = 'idle';
+      s.recordError = reason;
+    }, 'recorder');
+    app.say(source === 'mic' ? 'Microphone unavailable' : 'Tab audio unavailable');
+  };
+  if (!Recorder.supports(source)) return fail(`${SOURCE_LABELS[SOURCES.indexOf(source)]} recording isn't supported in this browser. Use Resample or Load File.`);
   app.capture = null;
-  app.ui.update((s) => void (s.recorder = 'opening'), 'recorder');
+  app.ui.update((s) => {
+    s.recorder = 'opening';
+    s.recordError = '';
+  }, 'recorder');
+  if (source !== 'resample') {
+    const blocked = await preflight(source);
+    if (blocked) return fail(blocked);
+  }
   try {
     app.recorder.onLimit = (): void => void toggleSampling(app);
     await app.recorder.start(source);
     app.ui.update((s) => void (s.recorder = 'recording'), 'recorder');
   } catch (error) {
-    app.ui.update((s) => void (s.recorder = 'idle'), 'recorder');
-    const denied = error instanceof DOMException && (error.name === 'NotAllowedError' || error.name === 'SecurityError');
-    app.say(denied ? 'Permission denied for this input' : error instanceof Error ? error.message : 'Could not open input');
+    fail(source === 'resample' ? (error instanceof Error ? error.message : 'Could not record') : await explain(source, error));
   }
 }
 
@@ -52,7 +65,10 @@ export const recordPage: PageDef = {
       'Source',
       SOURCE_LABELS,
       () => SOURCES.indexOf(app.project.state.settings.inputSource),
-      (i) => app.project.update((p) => void (p.settings.inputSource = SOURCES[i]!), 'settings'),
+      (i) => {
+        app.project.update((p) => void (p.settings.inputSource = SOURCES[i]!), 'settings');
+        if (app.ui.state.recordError) app.ui.update((s) => void (s.recordError = ''), 'recorder');
+      },
     ),
     null,
     null,
@@ -83,6 +99,7 @@ export const recordPage: PageDef = {
     const state = h('span', { class: 'big' });
     const note = h('span', { class: 'dim' });
     const wave = h('slab-waveform', { class: 'wave' }) as SlabWaveform;
+    const problem = h('p', { class: 'notice', role: 'status' });
     let shown: unknown = null;
     const frame = (): void => {
       if (app.ui.state.recorder !== 'recording') return;
@@ -108,8 +125,13 @@ export const recordPage: PageDef = {
         shown = app.capture;
         wave.peaks = app.capture ? peaks(app.capture.channels, 400) : null;
       }
+      const blocked = ui.recorder === 'idle' && ui.recordError !== '';
+      if (problem.textContent !== ui.recordError) problem.textContent = ui.recordError;
+      problem.hidden = !blocked;
+      wave.hidden = blocked;
+      if (blocked) state.textContent = 'BLOCKED';
       frame();
     };
-    return { el: h('div', { class: 'page record' }, h('div', { class: 'head' }, state, note), wave), update, frame };
+    return { el: h('div', { class: 'page record' }, h('div', { class: 'head' }, state, note), wave, problem), update, frame };
   },
 };

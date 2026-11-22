@@ -28,3 +28,13 @@ interface BeforeInstallPromptEvent extends Event {
 interface WindowEventMap {
   beforeinstallprompt: BeforeInstallPromptEvent;
 }
+
+/** Permissions Policy (Chromium); `featurePolicy` is the older name. */
+interface PolicyIntrospection {
+  allowsFeature: (feature: string) => boolean;
+}
+
+interface Document {
+  permissionsPolicy?: PolicyIntrospection;
+  featurePolicy?: PolicyIntrospection;
+}

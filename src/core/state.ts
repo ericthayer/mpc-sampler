@@ -45,6 +45,8 @@ export interface UiState {
   stepVel: number;
   message: string;
   recorder: RecorderState;
+  /** Why the last attempt to open a live input failed; shown on the record page until it changes. */
+  recordError: string;
   chop: { mode: 'equal' | 'transient'; slices: number; sensitivity: number; target: number };
   warp: { beats: number; mode: 'stretch' | 'repitch' };
   /** Time Correct strength, 0..1. */
@@ -86,6 +88,7 @@ export function initialUi(): UiState {
     stepVel: 100,
     message: '',
     recorder: 'idle',
+    recordError: '',
     chop: { mode: 'equal', slices: 8, sensitivity: 0.5, target: 1 },
     warp: { beats: 4, mode: 'stretch' },
     correctStrength: 1,

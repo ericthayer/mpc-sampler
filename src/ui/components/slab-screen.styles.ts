@@ -156,6 +156,8 @@ export const screenStyles = sheet(css`
   .wave, .matrix { inline-size: 100%; block-size: 100%; min-block-size: 0; }
   .page.sample, .page.chop, .page.record, .page.step { grid-template-rows: auto minmax(0, 1fr); }
   .matrix { display: block; cursor: crosshair; touch-action: none; }
+  .notice { margin: 0; align-self: start; color: var(--slab-led-amber, #ffb02e); line-height: 1.35; text-wrap: pretty; }
+  .notice[hidden], .wave[hidden] { display: none; }
 
   .page.main { grid-template-rows: auto minmax(0, 1fr); }
   .cells { display: grid; grid-template-columns: 1.15fr 1fr 0.9fr; gap: 0.6em; }
