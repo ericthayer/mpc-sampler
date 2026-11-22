@@ -1,0 +1,92 @@
+/*
+ * Global tokens and page chrome. Component styles live with their components
+ * (constructable stylesheets in src/ui) and read these custom properties
+ * through the shadow boundary.
+ */
+
+/* 1u = 1% of the faceplate width. Registered so it computes to px once and inherits. */
+@property --u {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 6px;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --slab-desk: #161514;
+  --slab-desk-hi: #24221f;
+  --slab-body: #e4e0d5;
+  --slab-body-hi: #f1eee5;
+  --slab-body-lo: #d3cec1;
+  --slab-glass: #121214;
+  --slab-glass-hi: #232327;
+  --slab-pad: #8c8e95;
+  --slab-pad-frame: #191b2a;
+  --slab-strip: #9b9c9e;
+
+  /* Ink */
+  --slab-ink: #2a2a2c;
+  --slab-shift-ink: #a8380f;
+  --slab-focus: #ffd24a;
+
+  /* Button caps */
+  --slab-btn-grey: #56585d;
+  --slab-btn-dark: #2c2d31;
+  --slab-btn-orange: #ee6a3c;
+  --slab-btn-blue: #43a7e6;
+
+  /* LEDs */
+  --slab-led-blue: #4f7dff;
+  --slab-led-green: #5fe07a;
+  --slab-led-red: #ff4d4d;
+  --slab-led-amber: #ffb02e;
+
+  /* Display */
+  --slab-screen-bg: #0b0d10;
+  --slab-screen-fg: #f1efe6;
+  --slab-screen-dim: #8a8d95;
+  --slab-screen-line: #2a2d34;
+  --slab-screen-accent: #f5c542;
+
+  /* Type */
+  --slab-font-label: 'Helvetica Neue', Helvetica, 'Arial Nova', Arial, sans-serif;
+  --slab-font-screen: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  block-size: 100%;
+}
+
+body {
+  margin: 0;
+  min-block-size: 100%;
+  display: grid;
+  align-content: center;
+  padding-block: max(1rem, env(safe-area-inset-top, 0px)) max(1rem, env(safe-area-inset-bottom, 0px));
+  padding-inline: max(0.75rem, env(safe-area-inset-left, 0px)) max(0.75rem, env(safe-area-inset-right, 0px));
+  background: radial-gradient(120% 90% at 50% 0%, var(--slab-desk-hi), var(--slab-desk) 70%) fixed;
+  color: var(--slab-body-hi);
+  font-family: var(--slab-font-label);
+  /* The instrument handles its own gestures; stop rubber-banding from stealing them. */
+  overscroll-behavior: none;
+}
+
+slab-app:not(:defined) {
+  display: block;
+  min-block-size: 60vh;
+}
+
+.fallback {
+  max-inline-size: 40ch;
+  margin: 4rem auto;
+  text-align: center;
+  line-height: 1.5;
+}

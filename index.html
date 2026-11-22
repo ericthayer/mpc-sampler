@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>SLAB/16 — sampling groovebox</title>
+    <meta name="description" content="A 16-pad sampler and sequencer that runs in the browser. Load or record samples, chop them, and build beats." />
+    <meta name="theme-color" content="#161514" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="stylesheet" href="./styles/app.css" />
+    <link rel="modulepreload" href="./dist/main.js" />
+    <script type="module" src="./dist/main.js"></script>
+  </head>
+  <body>
+    <slab-app></slab-app>
+    <noscript>
+      <p class="fallback">SLAB/16 is an instrument built with Web Audio and needs JavaScript to run.</p>
+    </noscript>
+  </body>
+</html>
