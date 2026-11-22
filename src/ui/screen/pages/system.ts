@@ -21,7 +21,7 @@ export const midiPage: PageDef = {
   hint: 'Connect a MIDI controller: notes play the current bank, CC 1 / 74 / 71 turn K1–K3, Start/Stop run the transport.',
   params: (app) => [
     range('Base Note', 0, 108, 1, () => app.project.state.settings.midiBase, (v) => app.project.update((p) => void (p.settings.midiBase = v), 'settings'), noteName, 36),
-    null,
+    choice('Notes Play', ['PADS', 'KEYBOARD'], () => (app.project.state.settings.midiTarget === 'keys' ? 1 : 0), (i) => app.project.update((p) => void (p.settings.midiTarget = i === 1 ? 'keys' : 'pads'), 'settings')),
     null,
   ],
   chips: (app) => [
@@ -32,13 +32,14 @@ export const midiPage: PageDef = {
   view: (app) => {
     const status = line('STATUS');
     const inputs = line('INPUTS');
-    const map = line('PAD 1');
+    const map = line('NOTES');
     const update = (): void => {
       const midi = app.ui.state.midi;
       const text = { off: 'Not connected', on: 'Connected', denied: 'Permission denied', unsupported: 'Not supported in this browser' }[midi.status];
       status.set(MidiInput.supported ? text : 'Not supported in this browser');
       inputs.set(midi.inputs.length ? midi.inputs.join(', ') : '—');
-      map.set(noteName(app.project.state.settings.midiBase));
+      const settings = app.project.state.settings;
+      map.set(settings.midiTarget === 'keys' ? 'Play the selected pad chromatically (C4 = original pitch)' : `${noteName(settings.midiBase)} and up play pads 1–16`);
     };
     return { el: h('div', { class: 'page lines' }, status.el, inputs.el, map.el), update };
   },

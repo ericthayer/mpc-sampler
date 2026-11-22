@@ -1,4 +1,5 @@
 import { FACTORY_SOUNDS } from '../audio/factory-kit.js';
+import { patchPad, SYNTH_PATCHES } from '../audio/synth-patches.js';
 import {
   PAD_COUNT,
   SEQ_COUNT,
@@ -61,6 +62,7 @@ export function defaultSettings(): Settings {
     levelsType: 'velocity',
     faderTarget: 'djFilter',
     midiBase: 36,
+    midiTarget: 'pads',
     inputSource: 'mic',
   };
 }
@@ -110,6 +112,13 @@ export function demoProject(): Project {
     pad.sampleId = sound.id;
     pad.name = sound.name;
   });
+  // Bank D: synth patches for the keyboard, then the melodic one-shots from bank A.
+  SYNTH_PATCHES.forEach((patch, i) => {
+    project.pads[48 + i] = patchPad(patch, emptyPad());
+  });
+  project.pads[48 + SYNTH_PATCHES.length] = { ...emptyPad(), sampleId: 'factory:keys', name: 'Keys C4', release: 0.3, level: 0.7 };
+  project.pads[49 + SYNTH_PATCHES.length] = { ...emptyPad(), sampleId: 'factory:stab', name: 'Chord Stab', level: 0.6 };
+
   // Hats choke each other; bass and keys respond to note length.
   project.pads[4]!.choke = 1;
   project.pads[5]!.choke = 1;

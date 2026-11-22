@@ -9,7 +9,7 @@ export type PageId =
 export type ProjectTopic = 'project' | 'pads' | 'seq' | 'fx' | 'settings' | 'tempo' | 'song' | 'volume';
 export type UiTopic =
   | 'page' | 'bank' | 'pad' | 'seq' | 'shift' | 'modes' | 'transport' | 'focus'
-  | 'message' | 'recorder' | 'params' | 'midi' | 'pool';
+  | 'message' | 'recorder' | 'params' | 'midi' | 'pool' | 'view' | 'keys';
 
 export type RecorderState = 'idle' | 'opening' | 'recording' | 'captured';
 export type MidiStatus = 'off' | 'on' | 'denied' | 'unsupported';
@@ -58,6 +58,10 @@ export interface UiState {
   activeFx: number[];
   midi: { status: MidiStatus; inputs: string[] };
   canInstall: boolean;
+  /** Which interface is on screen. Both share every store, so swapping never interrupts playback. */
+  view: 'sampler' | 'keys';
+  /** Lowest C shown on the keyboard (MIDI note), and whether released keys keep sounding. */
+  keys: { low: number; sustain: boolean };
 }
 
 export function initialUi(): UiState {
@@ -97,6 +101,8 @@ export function initialUi(): UiState {
     activeFx: [],
     midi: { status: 'off', inputs: [] },
     canInstall: false,
+    view: 'sampler',
+    keys: { low: 48, sustain: false },
   };
 }
 

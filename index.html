@@ -15,12 +15,17 @@
     <script type="module" src="./dist/main.js"></script>
   </head>
   <body>
-    <nav class="chrome" aria-label="Help">
+    <nav class="chrome" aria-label="Interface and help">
+      <div class="switch" role="group" aria-label="Interface">
+        <button type="button" data-view="sampler" aria-pressed="true">Sampler</button>
+        <button type="button" data-view="keys" aria-pressed="false">Keyboard</button>
+      </div>
       <a href="./help.html" target="_blank" rel="noopener">Guide</a>
       <button type="button" id="open-tour">Tour</button>
       <button type="button" id="open-shortcuts">Shortcuts <kbd>?</kbd></button>
     </nav>
     <slab-app></slab-app>
+    <slab-keys hidden></slab-keys>
     <noscript>
       <p class="fallback">SLAB/16 is an instrument built with Web Audio and needs JavaScript to run.</p>
     </noscript>

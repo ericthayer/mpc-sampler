@@ -15,6 +15,8 @@ export interface VoiceOptions {
 
 interface Voice {
   pad: number;
+  /** Extra semitones this voice was started with; one pad can sound several pitches at once. */
+  semi: number;
   choke: number;
   sustained: boolean;
   release: number;
@@ -45,10 +47,14 @@ export class VoiceBank {
 
     const sustained = !opts.forceOneShot && (pad.loop || pad.mode === 'hold');
     const latchedLoop = pad.loop && pad.mode === 'oneshot' && opts.duration === undefined && !opts.forceOneShot;
+    const semi = opts.semi ?? 0;
     let wasLooping = false;
     for (const voice of this.#voices) {
-      if (voice.pad === padIndex || (pad.choke > 0 && voice.choke === pad.choke)) {
-        if (voice.pad === padIndex && voice.sustained) wasLooping = true;
+      // Re-hitting the same note cuts it; other pitches on the same pad ring together (chords).
+      const sameNote = voice.pad === padIndex && voice.semi === semi;
+      const choked = pad.choke > 0 && voice.choke === pad.choke && voice.pad !== padIndex;
+      if (sameNote || choked) {
+        if (sameNote && voice.sustained) wasLooping = true;
         voice.stop(when, CUT_FADE);
       }
     }
@@ -59,7 +65,7 @@ export class VoiceBank {
     const end = clamp(opts.region?.end ?? pad.end, 0, 1);
     const length = Math.max(0.004, (Math.max(start, end) - Math.min(start, end)) * buffer.duration);
     const offset = (pad.reverse ? 1 - Math.max(start, end) : Math.min(start, end)) * buffer.duration;
-    const rate = semitoneRatio(pad.semi + pad.fine / 100 + (opts.semi ?? 0));
+    const rate = semitoneRatio(pad.semi + pad.fine / 100 + semi);
     const peak = velocityGain(vel) * pad.level;
     const attack = Math.max(0.002, pad.attack);
 
@@ -105,6 +111,7 @@ export class VoiceBank {
     let stopped = false;
     const voice: Voice = {
       pad: padIndex,
+      semi,
       choke: pad.choke,
       sustained,
       release: Math.max(0.005, pad.release),
@@ -128,10 +135,10 @@ export class VoiceBank {
     return true;
   }
 
-  /** Note-off for hold-mode pads. One-shots ignore it. */
-  release(padIndex: number, when: number): void {
+  /** Note-off for hold-mode pads (one pitch, or all of them). One-shots ignore it. */
+  release(padIndex: number, when: number, semi?: number): void {
     for (const voice of this.#voices) {
-      if (voice.pad === padIndex && voice.sustained) voice.stop(when, voice.release);
+      if (voice.pad === padIndex && voice.sustained && (semi === undefined || voice.semi === semi)) voice.stop(when, voice.release);
     }
   }
 

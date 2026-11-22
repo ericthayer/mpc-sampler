@@ -26,6 +26,7 @@ export function bindHelp(app: App, controller: Controller, faceplate: SlabApp): 
 
   const startTour = (): void => {
     help.close();
+    controller.setView('sampler'); // the tour points at the faceplate
     tour.start();
   };
 

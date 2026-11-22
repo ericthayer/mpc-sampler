@@ -56,6 +56,9 @@ const SHORTCUTS: readonly [string, string][] = [
   ['`M` `L`', 'Mute mode, 16 levels'],
   ['`Backspace`', 'Erase mode'],
   ['`Esc`', 'Back to the main page'],
+  ['````', 'Swap between sampler and keyboard'],
+  ['`A`–`;`  `W` `E` `T`…', 'Keyboard view: white and black keys'],
+  ['`Z` `X`', 'Keyboard view: octave down / up'],
   ['`?`', 'This list'],
 ];
 

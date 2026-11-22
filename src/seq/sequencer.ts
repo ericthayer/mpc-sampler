@@ -9,7 +9,11 @@ const LOOKAHEAD = 0.12;
 const START_DELAY = 0.04;
 const MARKS = 512;
 
+/** One held note: a pad at a pitch. Keyboard chords hold several on the same pad. */
+const noteKey = (pad: number, semi: number): number => pad * 256 + semi + 128;
+
 interface HeldPad {
+  pad: number;
   vel: number;
   semi: number;
 }
@@ -130,22 +134,28 @@ export class Sequencer {
 
   /** A pad went down. Tracks it for note repeat / erase and records it when recording. */
   padDown(pad: number, vel: number, semi = 0): void {
-    this.#held.set(pad, { vel, semi });
+    this.#held.set(noteKey(pad, semi), { pad, vel, semi });
     this.#ensureRunning();
     const ui = this.ui.state;
     if (ui.playing && ui.recording && !ui.noteRepeat && !ui.eraseMode) this.#recordNote(pad, vel, semi);
   }
 
-  padUp(pad: number): void {
-    this.#held.delete(pad);
-    const open = this.#open.get(pad);
+  padUp(pad: number, semi = 0): void {
+    const key = noteKey(pad, semi);
+    this.#held.delete(key);
+    const open = this.#open.get(key);
     if (open) {
       const length = sequenceLength(this.sequence);
       const now = Math.floor(this.positionTick());
       open.event.len = Math.max(TICKS_PER_STEP / 2, (now - open.start + length) % length);
-      this.#open.delete(pad);
+      this.#open.delete(key);
       this.project.emit('seq');
     }
+  }
+
+  #isHeld(pad: number): boolean {
+    for (const held of this.#held.values()) if (held.pad === pad) return true;
+    return false;
   }
 
   releaseAll(): void {
@@ -167,7 +177,7 @@ export class Sequencer {
     const event: NoteEvent = { tick, pad, vel, len: TICKS_PER_STEP };
     if (semi) event.semi = semi;
     // Replace an identical hit rather than stacking flams on the same grid line.
-    const existing = seq.events.findIndex((e) => e.tick === tick && e.pad === pad);
+    const existing = seq.events.findIndex((e) => e.tick === tick && e.pad === pad && (e.semi ?? 0) === semi);
     if (existing >= 0) seq.events.splice(existing, 1);
     seq.events.push(event);
     sortEvents(seq.events);
@@ -177,12 +187,12 @@ export class Sequencer {
     const scheduledAhead = (this.#tick - now + length) % length;
     if (forward < division && forward >= scheduledAhead) this.#suppress.add(event);
 
-    this.#open.set(pad, { event, start: now });
+    this.#open.set(noteKey(pad, semi), { event, start: now });
     this.project.emit('seq');
   }
 
   #closeOpenNotes(): void {
-    for (const pad of [...this.#open.keys()]) this.padUp(pad);
+    for (const { event } of [...this.#open.values()]) this.padUp(event.pad, event.semi ?? 0);
   }
 
   #haltVoices(): void {
@@ -297,7 +307,7 @@ export class Sequencer {
           let erased = false;
           for (const event of events) {
             if (this.#suppress.delete(event)) continue;
-            if (ui.eraseMode && this.#held.has(event.pad)) {
+            if (ui.eraseMode && this.#isHeld(event.pad)) {
               const at = this.sequence.events.indexOf(event);
               if (at >= 0) this.sequence.events.splice(at, 1);
               erased = true;
@@ -315,13 +325,14 @@ export class Sequencer {
       const base = QUANT_DIVISIONS[settings.quantDiv]!.ticks;
       const division = ui.triplet ? Math.max(4, Math.round((base * 2) / 3)) : base;
       if (((tick % division) + division) % division === 0) {
-        for (const [padIndex, held] of this.#held) {
+        for (const held of this.#held.values()) {
+          const padIndex = held.pad;
           const pad = pads[padIndex];
           if (!pad) continue;
           this.engine.trigger(padIndex, pad, held.vel, time, { semi: held.semi, duration: division * spt * 0.9 });
           if (ui.playing && ui.recording && tick >= 0) {
             const seq = this.sequence;
-            if (!seq.events.some((e) => e.tick === tick && e.pad === padIndex)) {
+            if (!seq.events.some((e) => e.tick === tick && e.pad === padIndex && (e.semi ?? 0) === held.semi)) {
               const event: NoteEvent = { tick, pad: padIndex, vel: held.vel, len: Math.max(1, Math.floor(division * 0.9)) };
               if (held.semi) event.semi = held.semi;
               seq.events.push(event);

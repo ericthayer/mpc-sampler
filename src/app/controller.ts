@@ -3,6 +3,7 @@ import { PADS_PER_BANK, type FaderTarget } from '../core/types.js';
 import { clamp } from '../core/util.js';
 import { hapticTick } from '../io/platform.js';
 import { tapTempo } from '../seq/timing.js';
+import { ROOT_NOTE } from '../audio/synth-patches.js';
 import type { PageDef, Param } from '../ui/screen/page.js';
 import { releasePadFx } from '../ui/screen/pages/fx.js';
 import { PAGES } from '../ui/screen/pages/index.js';
@@ -20,6 +21,11 @@ export type ButtonId =
 
 const SHIFT_TAP_MS = 350;
 
+export interface NoteDetail {
+  note: number;
+  on: boolean;
+}
+
 /**
  * Translates hardware gestures (buttons, pads, knobs, wheel, fader) into actions.
  * Fires `pad` (detail: in-bank index) whenever the player strikes a pad to make sound.
@@ -28,6 +34,8 @@ export class Controller extends EventTarget {
   #shiftDownAt = 0;
   #shiftUsed = false;
   #taps: number[] = [];
+  /** Keyboard notes that are down (MIDI note → the pad and pitch they started), so note-off matches note-on. */
+  #notes = new Map<number, { pad: number; semi: number }>();
   /** What each held pad is doing, so its release matches its press even if the mode changes. */
   #downPads = new Map<number, { target: number; page: PageDef | null }>();
 
@@ -222,6 +230,43 @@ export class Controller extends EventTarget {
     if (stillHeld) return;
     this.app.engine.release(down.target);
     this.app.sequencer.padUp(down.target);
+  }
+
+  /**
+   * Keyboard note-on: plays the selected pad at a pitch relative to C4 and records it
+   * like a pad hit. Fires `note` ({ note, on }) so every keyboard view can light the key.
+   */
+  keyDown(note: number, velocity: number): void {
+    const { app } = this;
+    app.engine.start();
+    if (this.#notes.has(note)) this.keyUp(note);
+    const padIndex = app.ui.state.pad;
+    const semi = note - ROOT_NOTE;
+    const vel = app.project.state.settings.fullLevel ? 127 : velocity;
+    app.engine.trigger(padIndex, app.project.state.pads[padIndex]!, vel, undefined, { semi });
+    app.sequencer.padDown(padIndex, vel, semi);
+    this.#notes.set(note, { pad: padIndex, semi });
+    this.dispatchEvent(new CustomEvent<NoteDetail>('note', { detail: { note, on: true } }));
+  }
+
+  keyUp(note: number): void {
+    const held = this.#notes.get(note);
+    if (!held) return;
+    this.#notes.delete(note);
+    this.app.engine.release(held.pad, undefined, held.semi);
+    this.app.sequencer.padUp(held.pad, held.semi);
+    this.dispatchEvent(new CustomEvent<NoteDetail>('note', { detail: { note, on: false } }));
+  }
+
+  allNotesOff(): void {
+    for (const note of [...this.#notes.keys()]) this.keyUp(note);
+  }
+
+  /** Swap between the pad sampler and the keyboard. Playback and recording carry on. */
+  setView(view: 'sampler' | 'keys'): void {
+    if (this.app.ui.state.view === view) return;
+    this.allNotesOff();
+    this.app.ui.update((s) => void (s.view = view), 'view');
   }
 
   /** Audio files dropped on a pad load from that pad onward; a .slab file opens a project. */

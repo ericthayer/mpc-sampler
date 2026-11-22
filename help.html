@@ -12,7 +12,7 @@
   <body>
     <header class="masthead">
       <h1 class="wordmark">SLAB<b>/16</b><small>Owner's guide</small></h1>
-      <p>Everything you need to go from first sound to finished track: a quick start, six short lessons, drum patterns to copy, the full controls reference, and places to learn more and find sounds.</p>
+      <p>Everything you need to go from first sound to finished track: a quick start, seven short lessons, drum patterns to copy, the full controls reference, and places to learn more and find sounds.</p>
       <nav aria-label="Get started">
         <a class="pill primary" href="./#tour">Open SLAB/16 with the tour</a>
         <a class="pill" href="./">Open SLAB/16</a>
@@ -108,7 +108,7 @@
           <!-- 03 -->
           <section id="lessons" aria-labelledby="h-lessons">
             <h2 class="chapter" id="h-lessons"><span>03</span>Lessons</h2>
-            <p class="lede">Six short lessons, each one a real task. Work through them in order the first time.</p>
+            <p class="lede">Seven short lessons, each one a real task. Work through them in order the first time.</p>
 
             <h3 id="lesson-record">Lesson 1 · Record your first beat</h3>
             <p>Start from an empty sequence so you can hear only what you play.</p>
@@ -174,6 +174,23 @@
               <li><span class="cap">Note Repeat</span>: hold a pad and it retriggers on the grid set on the Time Correct page (<span class="cap dark">Shift</span> + pad 14). <span class="cap dark">Shift</span> + <span class="cap">Note Repeat</span> switches to triplets for rolls.</li>
             </ul>
             <p>Pad FX and lo-fi are live only and aren't in a bounce. To keep a performance, <strong>Resample</strong> it (Lesson 3) onto a pad.</p>
+
+            <h3 id="lesson-keys">Lesson 7 · Play melodies on the keyboard</h3>
+            <p>The keyboard is a second interface for the same instrument. Use the <strong>Sampler | Keyboard</strong> switch above it, or press <kbd>`</kbd>, to swap between the two. Both share your sounds, sequences and transport, so you can swap in the middle of a take and nothing stops.</p>
+            <ol class="steps">
+              <li><p>Switch to <strong>Keyboard</strong>. It plays whichever pad is selected, at any pitch. C4 is the sound's original pitch.</p></li>
+              <li><p>Pick a sound in <strong>Sound (pad)</strong>. Bank D holds the synth patches: Saw Lead, Square Bass, Warm Pad, Sub Bass and Organ, plus Keys and Chord Stab. Drums and your own samples work too.</p></li>
+              <li><p>Play with the mouse or touch (slide across keys for a run, use several fingers for chords), a MIDI keyboard, or your computer keys: <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>F</kbd> <kbd>G</kbd> <kbd>H</kbd> <kbd>J</kbd> <kbd>K</kbd> are white keys from the lowest C, <kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd> are black keys, and <kbd>Z</kbd> / <kbd>X</kbd> shift the octave.</p></li>
+              <li><p>To record a bassline or melody, press <span class="cap">Rec</span> and <span class="cap dark">Play</span> on the keyboard's strip, then play over the beat. Notes keep their pitch and length, and chords are recorded as chords.</p></li>
+              <li><p>Switch back to the sampler to add drums, chop, or arrange. The notes you played are in the same sequence.</p></li>
+            </ol>
+            <ul>
+              <li><strong>Sustain</strong> keeps notes sounding after you let go, until you turn it off. Handy for pads and chords on a touch screen.</li>
+              <li>Synth patches loop for as long as a key is held. Tone them on the sampler's Sample page: the Filter tab opens or darkens them, and the Amp tab sets fade-in and fade-out.</li>
+              <li><strong>Load synth patch</strong> puts a patch on an empty pad (the selected one, or the first free pad in bank D) and selects it. It never replaces a sound unless every pad is full, and then it tells you.</li>
+              <li>To play a MIDI keyboard chromatically instead of triggering pads, set <strong>Notes Play</strong> to <strong>Keyboard</strong> on the MIDI page (<span class="cap dark">Shift</span> + pad 8).</li>
+              <li>Step edit shows when keyboard notes play, not their pitch. To change a note's pitch, undo and replay it.</li>
+            </ul>
           </section>
 
           <!-- 04 -->
@@ -334,7 +351,7 @@
                   <tr><td>Time Correct</td><td>Grid</td><td>Swing</td><td>Strength</td><td>Apply, Rec Quantize</td></tr>
                   <tr><td>Warp</td><td>Beats</td><td>Stretch / Repitch</td><td>—</td><td>Apply</td></tr>
                   <tr><td>Song</td><td>Step</td><td>Sequence</td><td>Repeats</td><td>Add, Remove, Song Mode, Bounce</td></tr>
-                  <tr><td>MIDI</td><td>Base note</td><td>—</td><td>—</td><td>Connect</td></tr>
+                  <tr><td>MIDI</td><td>Base note</td><td>Notes play pads / keyboard</td><td>—</td><td>Connect</td></tr>
                   <tr><td>Project</td><td>Volume</td><td>—</td><td>—</td><td>Save File, Open File, Bounce WAV, Tutorial, Guide, New, Demo</td></tr>
                 </tbody>
               </table>
@@ -358,6 +375,9 @@
                   <tr><td><kbd>M</kbd> <kbd>L</kbd></td><td>Mute mode, 16 levels</td></tr>
                   <tr><td><kbd>Backspace</kbd></td><td>Erase mode</td></tr>
                   <tr><td><kbd>Esc</kbd></td><td>Back to the main page</td></tr>
+                  <tr><td><kbd>`</kbd></td><td>Swap between sampler and keyboard</td></tr>
+                  <tr><td><kbd>A</kbd>–<kbd>'</kbd> · <kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd> <kbd>O</kbd> <kbd>P</kbd></td><td>Keyboard view: white keys · black keys</td></tr>
+                  <tr><td><kbd>Z</kbd> <kbd>X</kbd></td><td>Keyboard view: octave down / up</td></tr>
                   <tr><td><kbd>?</kbd></td><td>Shortcuts and tips</td></tr>
                 </tbody>
               </table>
@@ -366,7 +386,7 @@
             <h3 id="midi">MIDI controllers</h3>
             <p>Plug in a USB MIDI keyboard or pad controller, open the MIDI page (<span class="cap dark">Shift</span> + pad 8) and press <strong>Connect</strong>. Your browser asks for permission once.</p>
             <ul>
-              <li>Notes from the base note upward (C2, note 36, by default) play pads 1–16 of the current bank. Most pad controllers send 36 from their first pad.</li>
+              <li><strong>Notes Play</strong> chooses what notes do. <strong>Pads</strong>: notes from the base note upward (C2, note 36, by default) play pads 1–16 of the current bank. <strong>Keyboard</strong>: notes play the selected pad at pitch, like the on-screen keyboard. Most pad controllers send 36 from their first pad.</li>
               <li>CC 1 (mod wheel), CC 74 and CC 71 turn K1, K2 and K3.</li>
               <li>MIDI Start, Continue and Stop drive the transport, so a drum machine or DAW can start SLAB/16.</li>
             </ul>

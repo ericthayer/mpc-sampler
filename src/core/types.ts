@@ -92,6 +92,8 @@ export interface Settings {
   faderTarget: FaderTarget;
   /** MIDI note mapped to pad 1 of the current bank. */
   midiBase: number;
+  /** Incoming MIDI notes play the pads, or the selected pad chromatically like the on-screen keyboard. */
+  midiTarget: 'pads' | 'keys';
   inputSource: InputSource;
 }
 

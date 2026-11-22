@@ -28,6 +28,7 @@ Microphone, MIDI, install and offline support need HTTPS or `localhost`.
 
 | Area | Features |
 | --- | --- |
+| **Keyboard** | A second interface you can swap to at any time (`` ` ``): plays the selected pad chromatically with chords, sustain, octave shift and slide-to-play; five looping synth patches (Saw Lead, Square Bass, Warm Pad, Sub Bass, Organ) on bank D; records melodies into the same sequences; MIDI notes can drive it |
 | **Pads** | 4 banks × 16 pads, velocity from strike position or stylus pressure, multi-touch, choke groups, one-shot / hold / loop modes, mute, 16 Levels (velocity or chromatic tuning), Full Level |
 | **Samples** | Drag-and-drop or file picker (WAV, MP3, AAC, OGG, FLAC…), record from **microphone**, **another tab / system audio**, or **resample** SLAB's own output |
 | **Sample edit** | Trim with draggable start/end, loop, reverse, tune (±24 st + cents), level, pan, attack/release, per-pad filter (LP/HP/BP), normalize, crop, save as WAV |
@@ -94,6 +95,8 @@ data wheel and −/+ fine-tune whichever is highlighted. Double-click a knob to 
 | `B` `T` `N` `M` `L` | Bank, tap tempo, note repeat, mute, 16 levels |
 | `Backspace` | Erase mode |
 | `Esc` | Back to the main page |
+| `` ` `` | Swap between sampler and keyboard |
+| `A`–`'`, `W E T Y U O P`, `Z` `X` | Keyboard view: white keys, black keys, octave down / up |
 
 ## Architecture
 

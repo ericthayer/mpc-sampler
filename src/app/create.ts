@@ -1,5 +1,6 @@
 import { Engine } from '../audio/engine.js';
 import { buildFactoryKit } from '../audio/factory-kit.js';
+import { buildSynthPatches } from '../audio/synth-patches.js';
 import { Recorder } from '../audio/recorder.js';
 import { demoProject } from '../core/defaults.js';
 import { initialUi, type PageId, type ProjectTopic, type UiState, type UiTopic } from '../core/state.js';
@@ -30,17 +31,19 @@ export function createApp(): Runtime {
   const sequencer = new Sequencer(project, ui, engine, history);
   const recorder = new Recorder(engine);
 
-  for (const sample of buildFactoryKit()) engine.pool.add(sample);
+  for (const sample of [...buildFactoryKit(), ...buildSynthPatches()]) engine.pool.add(sample);
 
   let messageTimer: ReturnType<typeof setTimeout> | undefined;
   let controller: Controller | null = null;
 
   const midi = new MidiInput({
     noteOn: (note, velocity) => {
+      if (project.state.settings.midiTarget === 'keys') return controller?.keyDown(note, velocity);
       const pad = note - project.state.settings.midiBase;
       if (pad >= 0 && pad < PADS_PER_BANK) controller?.padDown(pad, velocity);
     },
     noteOff: (note) => {
+      if (project.state.settings.midiTarget === 'keys') return controller?.keyUp(note);
       const pad = note - project.state.settings.midiBase;
       if (pad >= 0 && pad < PADS_PER_BANK) controller?.padUp(pad);
     },

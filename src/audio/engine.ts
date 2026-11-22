@@ -131,8 +131,8 @@ export class Engine extends EventTarget {
     return played;
   }
 
-  release(padIndex: number, when?: number): void {
-    if (this.#ctx) this.#voices.release(padIndex, Math.max(when ?? 0, this.now));
+  release(padIndex: number, when?: number, semi?: number): void {
+    if (this.#ctx) this.#voices.release(padIndex, Math.max(when ?? 0, this.now), semi);
   }
 
   panic(): void {
