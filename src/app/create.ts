@@ -82,6 +82,12 @@ export function createApp(): Runtime {
 
   // Keep the audio graph in step with the project.
   engine.applyProject(project.state);
+  engine.addEventListener('blocked', () => {
+    // Re-check shortly: a gesture that's already in flight may resume it.
+    setTimeout(() => {
+      if (engine.started && !engine.running) app.say('Audio is paused by the browser. Tap or click anywhere to turn it on.');
+    }, 300);
+  });
   project.subscribe((topic) => {
     if (topic === 'fx' || topic === 'tempo' || topic === 'volume' || topic === 'project') engine.applyProject(project.state);
   });

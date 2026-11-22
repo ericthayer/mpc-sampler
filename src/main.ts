@@ -23,10 +23,21 @@ if (keys instanceof SlabKeys) {
 }
 bindKeyboard(app, controller, keys instanceof SlabKeys ? keys : null);
 
-// Browsers only allow audio after a gesture; start the engine on the very first one.
-const unlock = (): void => app.engine.start();
-window.addEventListener('pointerdown', unlock, { once: true, capture: true });
-window.addEventListener('keydown', unlock, { once: true, capture: true });
+// Browsers only allow audio after a gesture. Desktop browsers accept a press; iOS only
+// accepts the end of a tap. Keep listening until audio is actually running.
+const UNLOCK_EVENTS = ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'] as const;
+const unlock = (): void => {
+  app.engine.unlock();
+  if (!app.engine.running) return;
+  for (const type of UNLOCK_EVENTS) window.removeEventListener(type, unlock, true);
+};
+for (const type of UNLOCK_EVENTS) window.addEventListener(type, unlock, { capture: true, passive: true });
+// iOS suspends audio when the app is backgrounded or a call comes in; take it back on the next tap.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && app.engine.started && !app.engine.running) {
+    for (const type of UNLOCK_EVENTS) window.addEventListener(type, unlock, { capture: true, passive: true });
+  }
+});
 
 if ('requestIdleCallback' in window) requestIdleCallback(() => void registerServiceWorker());
 else setTimeout(() => void registerServiceWorker(), 2000);

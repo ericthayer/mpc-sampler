@@ -34,6 +34,11 @@ interface PolicyIntrospection {
   allowsFeature: (feature: string) => boolean;
 }
 
+/** Audio Session API (Safari 16.4+): how the page's audio mixes with the system. */
+interface Navigator {
+  audioSession?: { type: 'auto' | 'playback' | 'transient' | 'transient-solo' | 'ambient' | 'play-and-record' };
+}
+
 interface Document {
   permissionsPolicy?: PolicyIntrospection;
   featurePolicy?: PolicyIntrospection;

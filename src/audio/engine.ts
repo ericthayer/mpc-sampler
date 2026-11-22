@@ -48,11 +48,17 @@ export class Engine extends EventTarget {
   /** Call from a user gesture. Safe to call repeatedly. */
   start(): void {
     if (this.#ctx) {
-      if (this.#ctx.state === 'suspended') void this.#ctx.resume();
+      // iOS reports 'interrupted' after a call or Siri; both need a resume from a gesture.
+      if (this.#ctx.state !== 'running' && this.#ctx.state !== 'closed') void this.#ctx.resume().catch(() => undefined);
       return;
     }
+    // On iPhone and iPad, declare a music app so the ring/silent switch doesn't mute us (iOS 16.4+).
+    if (navigator.audioSession) navigator.audioSession.type = 'playback';
     const ctx = new AudioContext({ latencyHint: 'interactive' });
     this.#ctx = ctx;
+    ctx.addEventListener('statechange', () => this.#checkRunning());
+    // A context that never leaves 'suspended' means the browser is holding audio back.
+    setTimeout(() => this.#checkRunning(), 800);
     this.#chain = buildMasterChain(ctx);
     this.#voices = new VoiceBank(ctx, this.#chain.input, this.pool);
     this.#flexIn = new GainNode(ctx);
@@ -74,6 +80,30 @@ export class Engine extends EventTarget {
     void ctx.resume();
     void this.worklets();
     this.dispatchEvent(new Event('started'));
+  }
+
+  /**
+   * Call from gestures that browsers accept as permission to play: iOS only accepts the
+   * end of a tap (touchend / click), not touch-down. Starting a sound inside that
+   * gesture is what releases audio on iOS, so play one silent sample.
+   */
+  unlock(): void {
+    this.start();
+    const ctx = this.#ctx;
+    if (!ctx || ctx.state === 'running') return;
+    const silence = new AudioBufferSourceNode(ctx, { buffer: new AudioBuffer({ length: 1, sampleRate: ctx.sampleRate }) });
+    silence.connect(ctx.destination);
+    silence.start();
+  }
+
+  /** Fires `blocked` when the browser has audio on hold, so the UI can say how to release it. */
+  #checkRunning(): void {
+    const state = this.#ctx?.state;
+    if (state === 'suspended' || state === 'interrupted') this.dispatchEvent(new Event('blocked'));
+  }
+
+  get running(): boolean {
+    return this.#ctx?.state === 'running';
   }
 
   /** Loads the worklet module once and splices the performance-FX node into the chain. */

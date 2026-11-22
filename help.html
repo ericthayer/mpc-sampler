@@ -412,7 +412,12 @@
             <h2 class="chapter" id="h-trouble"><span>08</span>Troubleshooting</h2>
             <dl class="faq">
               <dt>I don't hear anything.</dt>
-              <dd>Click a pad or press <span class="cap dark">Play</span>: browsers keep audio off until you interact with the page. Check the volume knob on the top panel and your system volume. On an iPhone, turn off the silent switch; web audio follows it.</dd>
+              <dd>Click a pad or press <span class="cap dark">Play</span>: browsers keep audio off until you interact with the page. If the browser still holds it back, the display says so. Then play a pad and watch the level meter beside the display:
+                <ul>
+                  <li><strong>The meter moves:</strong> SLAB/16 is making sound and it's being lost on the way out. Check that the browser tab isn't muted (look for a crossed-out speaker on the tab), then check your system volume and which output device is selected.</li>
+                  <li><strong>The meter doesn't move:</strong> check the volume knob on the top panel. Then check the pad isn't muted (<span class="cap blue">Mute</span>) and has a sound.</li>
+                </ul>
+                On iPhone and iPad with iOS 16.4 or later, SLAB/16 plays even with the ring/silent switch on. On older versions, turn the switch off.</dd>
               <dt>The meter moves but there's no sound.</dt>
               <dd>Your browser is sending sound to a different output. Check which output device your system is using, or which one the browser is set to.</dd>
               <dt>Playing feels late.</dt>
