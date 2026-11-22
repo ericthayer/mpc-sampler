@@ -57,13 +57,21 @@ a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 
 /* ---------- header band (the faceplate's glass panel) ---------- */
+/* Same width and container breakpoint as .sheet, so the header text lines up with the sheet's content edge. */
 .masthead {
+  container: masthead / inline-size;
   max-inline-size: 76rem;
   margin: 0 auto;
   padding-block: max(28px, env(safe-area-inset-top, 0px)) 28px;
   color: var(--screen-fg);
+}
+.masthead-inner {
   display: grid;
   gap: 16px;
+  padding-inline: 20px;
+}
+@container masthead (inline-size > 56rem) {
+  .masthead-inner { padding-inline: 48px; }
 }
 .wordmark {
   margin: 0;
