@@ -191,7 +191,7 @@ export const appStyles = sheet(css`
 
   /* Touch screens get taller button caps. */
   @media (pointer: coarse) {
-    slab-button::part(cap) { min-block-size: 40px; }
+    slab-button::part(cap) { min-block-size: 44px; }
   }
 
   /* ---- handheld layout ---- */
@@ -235,7 +235,7 @@ export const appStyles = sheet(css`
     .knobs { display: contents; }
     #k1 { grid-area: k1; } #k2 { grid-area: k2; } #k3 { grid-area: k3; }
     .knobs slab-knob, #wheel { --slab-knob-size: calc(var(--u) * 15); }
-    slab-button::part(cap) { min-block-size: max(40px, calc(var(--u) * 10)); }
+    slab-button::part(cap) { min-block-size: max(44px, calc(var(--u) * 10)); }
     #fader {
       inline-size: 100%;
       block-size: calc(var(--u) * 12);
