@@ -11,7 +11,8 @@
     "dev": "npm run build && (npm run watch & npm run serve)",
     "start": "npm run build && npm run serve",
     "test": "npm run build && node --test tests/*.test.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build:site": "npm run build && node scripts/build-site.mjs"
   },
   "devDependencies": {
     "typescript": "^5.9.0"

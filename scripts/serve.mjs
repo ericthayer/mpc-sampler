@@ -1,11 +1,12 @@
 // Zero-dependency static server for local development.
-// Usage: node scripts/serve.mjs [port]
+// Usage: node scripts/serve.mjs [port] [folder]
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
+// Optional second argument serves another folder, e.g. `node scripts/serve.mjs 5173 site` to check a build.
+const root = resolve(fileURLToPath(new URL('..', import.meta.url)), process.argv[3] ?? '.');
 const port = Number(process.argv[2] ?? process.env.PORT ?? 5173);
 
 const TYPES = {

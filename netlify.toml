@@ -1,0 +1,26 @@
+"$schema" = "https://open-api.netlify.com/netlify.schema.json"
+
+# Static site: tsc compiles src/ to dist/, then build-site copies only what the browser loads into site/.
+[build]
+  command = "npm run build:site"
+  publish = "site"
+  environment = { NODE_VERSION = "22" }
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Recording (microphone, tab audio) and MIDI are used by this site itself only.
+    Permissions-Policy = "microphone=(self), display-capture=(self), midi=(self)"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# The offline cache must always check for a new service worker, or updates stall.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"

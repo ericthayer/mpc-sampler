@@ -20,9 +20,16 @@ npm run dev        # same, with tsc --watch
 npm test           # build + 23 unit tests (node:test, no extra packages)
 ```
 
-Any static host works: serve the repository root after `npm run build`
-(`index.html`, `styles/`, `dist/`, `sw.js`, `manifest.webmanifest`, `icons/`).
-Microphone, MIDI, install and offline support need HTTPS or `localhost`.
+### Deploy
+
+`npm run build:site` compiles and copies only what the browser loads into `site/`
+(the pages, `styles/`, `dist/`, `icons/`, `sw.js`, the manifest). Publish that folder on any
+static host; `node scripts/serve.mjs 5173 site` previews it locally.
+
+On Netlify, `netlify.toml` already sets the build command, the `site` publish folder,
+Node 22, and headers (microphone / tab-audio / MIDI permission for this site, and no caching
+of the service worker so updates arrive). Microphone, MIDI, install and offline support need
+HTTPS or `localhost`.
 
 ## What it does
 
