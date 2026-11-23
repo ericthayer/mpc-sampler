@@ -1,0 +1,45 @@
+/** Ambient types for web platform APIs that TypeScript's DOM lib doesn't ship yet. */
+
+interface FilePickerAcceptType {
+  description?: string;
+  accept: Record<string, string[]>;
+}
+
+interface OpenFilePickerOptions {
+  multiple?: boolean;
+  types?: FilePickerAcceptType[];
+}
+
+interface SaveFilePickerOptions {
+  suggestedName?: string;
+  types?: FilePickerAcceptType[];
+}
+
+interface Window {
+  showOpenFilePicker?: (options?: OpenFilePickerOptions) => Promise<FileSystemFileHandle[]>;
+  showSaveFilePicker?: (options?: SaveFilePickerOptions) => Promise<FileSystemFileHandle>;
+}
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  readonly userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
+
+interface WindowEventMap {
+  beforeinstallprompt: BeforeInstallPromptEvent;
+}
+
+/** Permissions Policy (Chromium); `featurePolicy` is the older name. */
+interface PolicyIntrospection {
+  allowsFeature: (feature: string) => boolean;
+}
+
+/** Audio Session API (Safari 16.4+): how the page's audio mixes with the system. */
+interface Navigator {
+  audioSession?: { type: 'auto' | 'playback' | 'transient' | 'transient-solo' | 'ambient' | 'play-and-record' };
+}
+
+interface Document {
+  permissionsPolicy?: PolicyIntrospection;
+  featurePolicy?: PolicyIntrospection;
+}

@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>SLAB/16 Guide</title>
+    <meta name="description" content="How to use SLAB/16: a quick start, step-by-step lessons, drum patterns, a full controls reference, troubleshooting and resources for making music." />
+    <meta name="theme-color" content="#161514" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles/help.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="masthead-inner">
+        <h1 class="wordmark">SLAB<b>/16</b><small>Owner's guide</small></h1>
+      <p>Everything you need to go from first sound to finished track: a quick start, seven short lessons, drum patterns to copy, the full controls reference, and places to learn more and find sounds.</p>
+      <nav aria-label="Get started">
+        <a class="pill primary" href="./#tour">Open SLAB/16 with the tour</a>
+        <a class="pill" href="./">Open SLAB/16</a>
+      </nav>
+      </div>
+    </header>
+
+    <div class="sheet">
+      <div class="layout">
+        <nav class="toc" aria-labelledby="toc-title">
+          <h2 id="toc-title">Contents</h2>
+          <ol>
+            <li><a href="#quick-start"><span>01</span>Quick start</a></li>
+            <li><a href="#layout"><span>02</span>Know the instrument</a></li>
+            <li><a href="#lessons"><span>03</span>Lessons</a></li>
+            <li><a href="#patterns"><span>04</span>Drum patterns</a></li>
+            <li><a href="#craft"><span>05</span>Making better beats</a></li>
+            <li><a href="#reference"><span>06</span>Controls reference</a></li>
+            <li><a href="#saving"><span>07</span>Saving and sharing</a></li>
+            <li><a href="#troubleshooting"><span>08</span>Troubleshooting</a></li>
+            <li><a href="#resources"><span>09</span>Resources</a></li>
+          </ol>
+        </nav>
+
+        <main>
+          <!-- 01 -->
+          <section id="quick-start" aria-labelledby="h-quick">
+            <h2 class="chapter" id="h-quick"><span>01</span>Quick start</h2>
+            <p class="lede">SLAB/16 opens with a drum kit on the pads and a demo beat in sequence 1. You can make sound in the first ten seconds.</p>
+            <ol class="steps">
+              <li><p>Press <span class="cap dark">Play</span> or <kbd>Space</kbd>. Browsers only allow sound after you click or press a key, so the first press also switches audio on.</p></li>
+              <li><p>Hit the pads along with the beat. With a keyboard, <kbd>Z</kbd> <kbd>X</kbd> <kbd>C</kbd> <kbd>V</kbd> are the bottom row of pads; the rows above are <kbd>A</kbd>–<kbd>F</kbd>, <kbd>Q</kbd>–<kbd>R</kbd> and <kbd>1</kbd>–<kbd>4</kbd>. The keys sit in the same shape as the pads.</p></li>
+              <li><p>Turn <span class="cap knob">K1</span> to change the tempo. The three knobs always control the three values along the bottom of the display, whatever page you are on.</p></li>
+              <li><p>Drag an audio file from your computer onto a pad. It replaces that pad's sound and is saved with your project.</p></li>
+              <li><p>Press <kbd>?</kbd> in the app at any time for the shortcut list, or press the compass button at the top of the page for a guided two-minute walkthrough. The book button opens this guide.</p></li>
+            </ol>
+            <div class="note">
+              <p><strong>SHIFT works with one finger.</strong> Hold <span class="cap dark">Shift</span> and press another control, or tap <span class="cap dark">Shift</span> once and it stays lit for your next press. The second function of every button and pad is printed beneath it.</p>
+            </div>
+          </section>
+
+          <!-- 02 -->
+          <section id="layout" aria-labelledby="h-layout">
+            <h2 class="chapter" id="h-layout"><span>02</span>Know the instrument</h2>
+            <figure style="margin: 8px 0 18px; max-inline-size: 26rem">
+              <svg viewBox="0 0 400 500" role="img" aria-labelledby="map-title map-desc" style="inline-size: 100%; height: auto">
+                <title id="map-title">Map of the SLAB/16 faceplate</title>
+                <desc id="map-desc">The display, volume knob and level meter sit across the top. Below them: mode buttons top left, knobs K1 to K3 top centre, pad-play buttons top right, the fader down the left side, the 4 by 4 pads in the centre, the data wheel and transport buttons down the right, and a help strip along the bottom.</desc>
+                <rect x="4" y="4" width="392" height="492" rx="22" fill="#e4e0d5" stroke="#b9b4a6" />
+                <rect x="16" y="16" width="368" height="104" rx="10" fill="#121214" />
+                <rect x="88" y="26" width="226" height="84" rx="5" fill="#0b0d10" stroke="#3a3a3f" />
+                <text x="201" y="72" fill="#f5c542" font-family="ui-monospace, monospace" font-size="13" text-anchor="middle">DISPLAY</text>
+                <circle cx="50" cy="72" r="17" fill="#d9d7d0" />
+                <text x="50" y="104" fill="#c9c7bf" font-size="8" font-weight="700" text-anchor="middle">VOLUME</text>
+                <rect x="330" y="30" width="38" height="56" rx="3" fill="#2a2a2e" />
+                <text x="349" y="104" fill="#c9c7bf" font-size="8" font-weight="700" text-anchor="middle">METER</text>
+                <g font-size="9" font-weight="700" fill="#232325" text-anchor="middle" font-family="Helvetica, Arial, sans-serif">
+                  <rect x="16" y="134" width="88" height="56" rx="6" fill="#56585d" /><text x="60" y="166" fill="#fff">MODE</text>
+                  <rect x="296" y="134" width="88" height="56" rx="6" fill="#43a7e6" /><text x="340" y="166">PAD PLAY</text>
+                  <circle cx="148" cy="160" r="16" fill="#f4f2ea" stroke="#b9b4a6" /><text x="148" y="190">K1</text>
+                  <circle cx="200" cy="160" r="16" fill="#f4f2ea" stroke="#b9b4a6" /><text x="200" y="190">K2</text>
+                  <circle cx="252" cy="160" r="16" fill="#f4f2ea" stroke="#b9b4a6" /><text x="252" y="190">K3</text>
+                  <rect x="16" y="202" width="88" height="22" rx="5" fill="#2c2d31" /><text x="60" y="217" fill="#fff">SHIFT · BANK</text>
+                  <rect x="44" y="234" width="32" height="170" rx="6" fill="#f4f2ea" stroke="#b9b4a6" /><text x="60" y="324" transform="rotate(-90 60 324)">FADER</text>
+                  <rect x="16" y="414" width="88" height="22" rx="5" fill="#56585d" /><text x="60" y="429" fill="#fff">ERASE · REPEAT</text>
+                  <rect x="114" y="202" width="172" height="234" rx="8" fill="#191b2a" />
+                  <text x="200" y="324" fill="#f1efe6" font-size="12">16 PADS</text>
+                  <rect x="296" y="202" width="88" height="22" rx="5" fill="#56585d" /><text x="340" y="217" fill="#fff">BROWSE · TAP</text>
+                  <circle cx="340" cy="268" r="28" fill="#f4f2ea" stroke="#b9b4a6" /><text x="340" y="271">DATA</text>
+                  <rect x="296" y="306" width="88" height="22" rx="5" fill="#56585d" /><text x="340" y="321" fill="#fff">−  /  +</text>
+                  <rect x="296" y="338" width="88" height="34" rx="5" fill="#56585d" /><text x="340" y="359" fill="#fff">RECORD</text>
+                  <rect x="296" y="382" width="88" height="54" rx="5" fill="#2c2d31" /><text x="340" y="413" fill="#fff">STOP · PLAY</text>
+                  <rect x="16" y="448" width="368" height="36" rx="8" fill="#9b9c9e" /><text x="200" y="470">HELP STRIP: WHAT TO DO NEXT</text>
+                </g>
+              </svg>
+            </figure>
+            <div class="scroll" tabindex="0" role="region" aria-label="Know the instrument table">
+              <table>
+                <thead><tr><th scope="col">Area</th><th scope="col">What it's for</th></tr></thead>
+                <tbody>
+                  <tr><td>Display</td><td>Shows the current page. The top line shows the page name, selected pad, sequence and tempo. The bottom row shows what K1–K3 control; click one to make it the target of the data wheel. Round soft buttons above it run page actions such as Load or Apply.</td></tr>
+                  <tr><td>Mode buttons</td><td>Open the main pages: <span class="cap">Sample</span> editing, <span class="cap">Seq</span>uences, <span class="cap orange">Pad FX</span> and <span class="cap orange">Knob FX</span>. Press a lit mode button again to return to the main page.</td></tr>
+                  <tr><td>Pad Play buttons</td><td>Change what the pads do: <span class="cap blue">Chop</span>, <span class="cap blue">Mute</span>, <span class="cap blue">Loop</span> and <span class="cap blue">16 Levels</span>.</td></tr>
+                  <tr><td>Pads</td><td>Play sounds, or act as selectors on some pages (sequences, steps, effects). A green pad is the selected one. Strike nearer the top of a pad to play it louder.</td></tr>
+                  <tr><td>Fader</td><td>Sweeps a DJ filter by default: left of centre muffles the mix, right of centre thins it out. <span class="cap">Shift</span> + pad 9 assigns it to something else.</td></tr>
+                  <tr><td>Data wheel, − / +</td><td>Fine-adjust whichever knob value is highlighted on the display.</td></tr>
+                  <tr><td>Help strip</td><td>A one-line hint for the page or mode you're in.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>On a phone the same controls stack vertically: display and knobs first, then the buttons, the fader, the pads and the transport.</p>
+          </section>
+
+          <!-- 03 -->
+          <section id="lessons" aria-labelledby="h-lessons">
+            <h2 class="chapter" id="h-lessons"><span>03</span>Lessons</h2>
+            <p class="lede">Seven short lessons, each one a real task. Work through them in order the first time.</p>
+
+            <h3 id="lesson-record">Lesson 1 · Record your first beat</h3>
+            <p>Start from an empty sequence so you can hear only what you play.</p>
+            <ol class="steps">
+              <li><p>Press <span class="cap">Seq</span>. The pads now choose between 16 sequences. Hit pad 3 to select empty sequence 03, then press <span class="cap">Seq</span> again to go back.</p></li>
+              <li><p>Press <span class="cap">Seq Record</span> (<kbd>Enter</kbd>), then <span class="cap dark">Play</span>. You get a one-bar count-in with a click, then recording starts. Recording loops: each time round, add another part.</p></li>
+              <li><p>First pass: kick (pad 1, <kbd>Z</kbd>) on beats 1 and 3. Second pass: snare (pad 3, <kbd>C</kbd>) on beats 2 and 4. Third pass: closed hat (pad 5, <kbd>A</kbd>) on every eighth note.</p></li>
+              <li><p>Press <span class="cap dark">Stop</span>. Notes you played were snapped to the nearest 16th note. If a take went wrong, press <span class="cap dark">Shift</span> then <span class="cap">−</span> to undo it.</p></li>
+            </ol>
+            <h4>Fix it in step edit</h4>
+            <p>Press <span class="cap dark">Shift</span> + <span class="cap">Seq</span> for step edit. The display shows a grid of the current bar for every pad in the bank; the pads become the 16 steps of the bar for the selected pad. Hit a pad to add or remove that step, or click straight on the grid.</p>
+            <div class="screen"><b>STEP EDIT</b> <span>A01 Kick Deep · bar 1/2</span><br />K1 Pad <b>01</b> · K2 Bar <b>1/2</b> · K3 Velocity <b>100</b></div>
+            <p>Use K1 to choose which pad you're editing, K2 to move between bars, and K3 to set how hard new steps play. Lower velocities on in-between hats make a beat breathe.</p>
+
+            <h3 id="lesson-sounds">Lesson 2 · Load and shape a sound</h3>
+            <ol class="steps">
+              <li><p>Drag one or more audio files onto a pad. Several files fill that pad and the ones after it. WAV, MP3, AAC/M4A, OGG and FLAC all work, depending on your browser.</p></li>
+              <li><p>Press <span class="cap">Sample</span> to edit the selected pad. On the <strong>Trim</strong> tab, drag the white markers on the waveform, or use K1 (start) and K2 (end), to cut off silence or keep one hit from a longer recording.</p></li>
+              <li><p>Use the other tabs: <strong>Tune</strong> for pitch and level, <strong>Filter</strong> for a low-pass, high-pass or band-pass, <strong>Amp</strong> for fade-in, fade-out and stereo position.</p></li>
+              <li><p>The soft buttons on the Trim tab reverse the sound, normalise it to full volume, or crop the file to your trim points.</p></li>
+            </ol>
+            <p><span class="cap">Sample Select</span> opens the sample pool: every sound in the project, including the factory kit. Turn K1 to audition and press <strong>Assign</strong> to put one on the selected pad.</p>
+            <div class="note"><p><strong>Hats that cut each other off.</strong> On the Amp tab, give your open and closed hats the same <strong>Choke</strong> group. Hitting the closed hat now silences a ringing open hat, as on a real kit. The demo kit is already set up this way.</p></div>
+
+            <h3 id="lesson-sample">Lesson 3 · Sample from the mic, a tab, or yourself</h3>
+            <ol class="steps">
+              <li><p>Press <span class="cap">Sample Record</span>. K1 chooses the source:</p>
+                <ul>
+                  <li><strong>Mic</strong>: your microphone or audio interface. Your browser asks for permission the first time.</li>
+                  <li><strong>Tab audio</strong>: sound from another browser tab, such as a video or a record on a streaming site. When the browser asks what to share, pick the tab and turn on <em>Share tab audio</em>. This works best in Chrome and Edge on desktop.</li>
+                  <li><strong>Resample</strong>: SLAB/16's own output, including effects. Use it to print a pad-FX move or bounce a pattern into a single loop.</li>
+                </ul>
+              </li>
+              <li><p>Press <span class="cap">Sample Record</span> again to start, and once more to stop. Silence at the start of a mic or tab take is trimmed automatically. Takes stop at 60 seconds.</p></li>
+              <li><p>Hit the pad where you want the take. Use <strong>Discard</strong> to throw it away instead.</p></li>
+            </ol>
+
+            <h3 id="lesson-chop">Lesson 4 · Chop a break</h3>
+            <p>Chopping cuts a loop into hits you can replay in a new order. It is the core sampling technique behind a lot of hip-hop and jungle.</p>
+            <ol class="steps">
+              <li><p>Load a drum loop onto a pad and select that pad. Trim it first if it has silence at either end.</p></li>
+              <li><p>Press <span class="cap blue">Chop</span>. K1 picks the method: <strong>Equal</strong> cuts it into 2–16 equal slices (good for loops cut exactly on the beat). <strong>Transient</strong> cuts at each hit; raise K2 sensitivity to find quieter hits.</p></li>
+              <li><p>The pads now play each slice, so you can check the cuts. K3 picks the bank the slices will go to.</p></li>
+              <li><p>Press <strong>Apply</strong>. The slices land on the pads of that bank (pad bank shown on the top panel as A B C D). Play them in a new order and record the result.</p></li>
+            </ol>
+            <p>To fit a loop to your tempo before or instead of chopping, use <strong>Warp</strong> (<span class="cap dark">Shift</span> + pad 15). Tell it how many beats the loop is: <strong>Stretch</strong> keeps the pitch, <strong>Repitch</strong> speeds it up or slows it down like a record.</p>
+
+            <h3 id="lesson-song">Lesson 5 · Turn patterns into a song</h3>
+            <ol class="steps">
+              <li><p>Build a few sequences: a main groove, a variation, a breakdown. <strong>Double</strong> on the <span class="cap">Seq</span> page copies a sequence to twice its length, giving you room to vary the second half.</p></li>
+              <li><p>While the beat plays, select another sequence on the <span class="cap">Seq</span> page. It waits for the current loop to finish before switching, so changes always land in time.</p></li>
+              <li><p>Open the song page with <span class="cap dark">Shift</span> + pad 12. K1 moves through the steps, K2 picks the sequence, K3 sets how many times it repeats. <strong>Add</strong> inserts the current sequence after the highlighted step.</p></li>
+              <li><p>Turn on <strong>Song Mode</strong> and press <span class="cap dark">Play</span> to hear the arrangement from the top. It stops when the song ends.</p></li>
+              <li><p>Press <strong>Bounce</strong> to render the song to a WAV file. It renders faster than real time and includes the filter, delay, reverb and compressor. Lo-fi and Pad FX are live only; resample them if you want them in the file.</p></li>
+            </ol>
+
+            <h3 id="lesson-perform">Lesson 6 · Perform with effects</h3>
+            <ul>
+              <li><span class="cap orange">Pad FX</span> turns the pads into 16 momentary effects on the whole mix. Hold a pad to apply one and let go to stop. Bottom row: stutters at ¼, ⅛, 1/16 and 1/32. Next row up: triplet stutter, roll, and two gates. Third row: filter sweeps, bit-crush and flange. Top row: half speed, tape stop, reverse and echo-out. Turn on <strong>Latch</strong> to keep an effect on until you hit the pad again.</li>
+              <li><span class="cap orange">Knob FX</span> holds four effects that are always on: filter with drive, tempo-synced delay, reverb, and lo-fi. Each has a tab; K1–K3 shape it. Double-click a knob to reset it.</li>
+              <li>The <strong>fader</strong> is a DJ filter by default: pull it down for a muffled breakdown, push it up for a thin build, centre it to open.</li>
+              <li><span class="cap blue">Mute</span> turns the pads into mute switches: drop the kick out for a bar, then bring it back.</li>
+              <li><span class="cap">Note Repeat</span>: hold a pad and it retriggers on the grid set on the Time Correct page (<span class="cap dark">Shift</span> + pad 14). <span class="cap dark">Shift</span> + <span class="cap">Note Repeat</span> switches to triplets for rolls.</li>
+            </ul>
+            <p>Pad FX and lo-fi are live only and aren't in a bounce. To keep a performance, <strong>Resample</strong> it (Lesson 3) onto a pad.</p>
+
+            <h3 id="lesson-keys">Lesson 7 · Play melodies on the keyboard</h3>
+            <p>The keyboard is a second interface for the same instrument. Use the two buttons at the top of the page (a pad grid for the sampler, piano keys for the keyboard), or press <kbd>`</kbd>, to swap between them. Both share your sounds, sequences and transport, so you can swap in the middle of a take and nothing stops.</p>
+            <ol class="steps">
+              <li><p>Switch to <strong>Keyboard</strong>. It plays whichever pad is selected, at any pitch. C4 is the sound's original pitch.</p></li>
+              <li><p>Pick a sound in <strong>Sound (pad)</strong>. Bank D holds the synth patches: Saw Lead, Square Bass, Warm Pad, Sub Bass and Organ, plus Keys and Chord Stab. Drums and your own samples work too.</p></li>
+              <li><p>Play with the mouse or touch (slide across keys for a run, use several fingers for chords), a MIDI keyboard, or your computer keys: <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>F</kbd> <kbd>G</kbd> <kbd>H</kbd> <kbd>J</kbd> <kbd>K</kbd> are white keys from the lowest C, <kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd> are black keys, and <kbd>Z</kbd> / <kbd>X</kbd> shift the octave.</p></li>
+              <li><p>To record a bassline or melody, press <span class="cap">Rec</span> and <span class="cap dark">Play</span> on the keyboard's strip, then play over the beat. Notes keep their pitch and length, and chords are recorded as chords.</p></li>
+              <li><p>Switch back to the sampler to add drums, chop, or arrange. The notes you played are in the same sequence.</p></li>
+            </ol>
+            <ul>
+              <li><strong>Sustain</strong> keeps notes sounding after you let go, until you turn it off. Handy for pads and chords on a touch screen.</li>
+              <li>Synth patches loop for as long as a key is held. Tone them on the sampler's Sample page: the Filter tab opens or darkens them, and the Amp tab sets fade-in and fade-out.</li>
+              <li><strong>Load synth patch</strong> puts a patch on an empty pad (the selected one, or the first free pad in bank D) and selects it. It never replaces a sound unless every pad is full, and then it tells you.</li>
+              <li>To play a MIDI keyboard chromatically instead of triggering pads, set <strong>Notes Play</strong> to <strong>Keyboard</strong> on the MIDI page (<span class="cap dark">Shift</span> + pad 8).</li>
+              <li>Step edit shows when keyboard notes play, not their pitch. To change a note's pitch, undo and replay it.</li>
+            </ul>
+          </section>
+
+          <!-- 04 -->
+          <section id="patterns" aria-labelledby="h-patterns">
+            <h2 class="chapter" id="h-patterns"><span>04</span>Drum patterns</h2>
+            <p class="lede">Four starting points to enter in step edit. Each row is one pad from the factory kit, each column a 16th note, and each group of four is one beat. Dark squares are full hits; grey squares are soft hits (K3 velocity around 60–70).</p>
+            <p>To enter one: select an empty sequence, open step edit (<span class="cap dark">Shift</span> + <span class="cap">Seq</span>), set K1 to the pad in the first column, then hit the steps shown. Set the tempo and swing on the main page.</p>
+            <article class="pattern" id="four-floor">
+<h3>Four on the floor</h3>
+<p class="meta" id="four-floor-meta">House, disco, techno · 120–128 BPM · swing 50–54%</p>
+<p>The kick on every beat is the engine. The open hat between kicks gives it lift.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Four on the floor table"><table class="grid-table" aria-describedby="four-floor-meta">
+<thead><tr><th scope="col"><span class="visually-hidden">Pad</span></th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr></thead><tbody>
+<tr aria-label="1 Kick Deep: steps 1, 5, 9, 13"><th scope="row">1 Kick Deep</th><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="4 Clap: steps 5, 13"><th scope="row">4 Clap</th><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="6 Hat Open: steps 3, 7, 11, 15"><th scope="row">6 Hat Open</th><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="8 Shaker: steps 2, 4, 6, 8, 10, 12, 14, 16 (soft: 2, 6, 10, 14)"><th scope="row">8 Shaker</th><td class="beat"><span class="step"></span></td><td><span class="step soft"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td class="beat"><span class="step"></span></td><td><span class="step soft"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td class="beat"><span class="step"></span></td><td><span class="step soft"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td class="beat"><span class="step"></span></td><td><span class="step soft"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td></tr>
+</tbody></table></div>
+</article>
+<article class="pattern" id="boom-bap">
+<h3>Boom bap</h3>
+<p class="meta" id="boom-bap-meta">Hip-hop · 86–96 BPM · swing 56–62%</p>
+<p>A lazy kick, a hard snare on 2 and 4, and 8th-note hats with alternating velocity. Swing does the rest.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Boom bap table"><table class="grid-table" aria-describedby="boom-bap-meta">
+<thead><tr><th scope="col"><span class="visually-hidden">Pad</span></th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr></thead><tbody>
+<tr aria-label="1 Kick Deep: steps 1, 8, 11 (soft: 8)"><th scope="row">1 Kick Deep</th><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step soft"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="3 Snare: steps 5, 13"><th scope="row">3 Snare</th><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="5 Hat Closed: steps 1, 3, 5, 7, 9, 11, 13, 15 (soft: 3, 7, 11, 15)"><th scope="row">5 Hat Closed</th><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step soft"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step soft"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step soft"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step soft"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="7 Rimshot: steps 16 (soft: 16)"><th scope="row">7 Rimshot</th><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step soft"></span></td></tr>
+</tbody></table></div>
+</article>
+<article class="pattern" id="trap">
+<h3>Half-time trap</h3>
+<p class="meta" id="trap-meta">Trap, drill · 130–150 BPM · swing 50%</p>
+<p>The clap lands on beat 3 only, so the groove feels half as fast as the tempo. Hold a hat pad with NOTE REPEAT for rolls.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Half-time trap table"><table class="grid-table" aria-describedby="trap-meta">
+<thead><tr><th scope="col"><span class="visually-hidden">Pad</span></th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr></thead><tbody>
+<tr aria-label="1 Kick Deep: steps 1, 4, 11"><th scope="row">1 Kick Deep</th><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="4 Clap: steps 9"><th scope="row">4 Clap</th><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="5 Hat Closed: steps 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 (soft: 2, 4, 6, 8, 10, 12, 14, 16)"><th scope="row">5 Hat Closed</th><td class="beat"><span class="step on"></span></td><td><span class="step soft"></span></td><td><span class="step on"></span></td><td><span class="step soft"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step soft"></span></td><td><span class="step on"></span></td><td><span class="step soft"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step soft"></span></td><td><span class="step on"></span></td><td><span class="step soft"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step soft"></span></td><td><span class="step on"></span></td><td><span class="step soft"></span></td></tr>
+<tr aria-label="13 808 Bass: steps 1, 11"><th scope="row">13 808 Bass</th><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+</tbody></table></div>
+</article>
+<article class="pattern" id="two-step">
+<h3>Two-step</h3>
+<p class="meta" id="two-step-meta">UK garage · 130–136 BPM · swing 60–66%</p>
+<p>Leaving out the kick on beat 3 is what makes it skip. Heavy swing is part of the style.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Two-step table"><table class="grid-table" aria-describedby="two-step-meta">
+<thead><tr><th scope="col"><span class="visually-hidden">Pad</span></th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr></thead><tbody>
+<tr aria-label="1 Kick Deep: steps 1, 11"><th scope="row">1 Kick Deep</th><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="4 Clap: steps 5, 13"><th scope="row">4 Clap</th><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step on"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="5 Hat Closed: steps 3, 7, 11, 15"><th scope="row">5 Hat Closed</th><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step on"></span></td><td><span class="step"></span></td></tr>
+<tr aria-label="7 Rimshot: steps 8, 16 (soft: 8, 16)"><th scope="row">7 Rimshot</th><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step soft"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td class="beat"><span class="step"></span></td><td><span class="step"></span></td><td><span class="step"></span></td><td><span class="step soft"></span></td></tr>
+</tbody></table></div>
+</article>
+            <p>The book <a href="https://shittyrecording.studio/">Pocket Operations</a> has hundreds more patterns in this same 16-step format, free to download.</p>
+          </section>
+
+          <!-- 05 -->
+          <section id="craft" aria-labelledby="h-craft">
+            <h2 class="chapter" id="h-craft"><span>05</span>Making better beats</h2>
+            <h3>Tempo and swing by style</h3>
+            <div class="scroll" tabindex="0" role="region" aria-label="Tempo and swing by style table">
+              <table>
+                <thead><tr><th scope="col">Style</th><th scope="col">Tempo (BPM)</th><th scope="col">Swing</th><th scope="col">Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>Lo-fi hip-hop</td><td>70–90</td><td>56–62%</td><td>Lo-fi tab on Knob FX, a vinyl-noise loop on a pad, soft hats</td></tr>
+                  <tr><td>Boom bap</td><td>86–96</td><td>56–62%</td><td>Chopped breaks, hard snare on 2 and 4</td></tr>
+                  <tr><td>Trap / drill</td><td>130–150</td><td>50%</td><td>Half-time feel, 808 bass tuned with 16 Levels, hat rolls</td></tr>
+                  <tr><td>House</td><td>120–128</td><td>50–54%</td><td>Four-on-the-floor kick, off-beat open hats</td></tr>
+                  <tr><td>Techno</td><td>125–140</td><td>50%</td><td>Short loops, slow changes, filter and delay as the arrangement</td></tr>
+                  <tr><td>UK garage</td><td>130–136</td><td>60–66%</td><td>Skipping two-step kicks, heavy swing</td></tr>
+                  <tr><td>Drum &amp; bass</td><td>170–176</td><td>50%</td><td>Chopped breaks played faster, sub bass</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Habits that make beats sound finished</h3>
+            <ul>
+              <li><strong>Vary velocity.</strong> Machine-even hats sound stiff. Turn off <strong>Full Level</strong> (<span class="cap dark">Shift</span> + pad 1) and play softer on in-between notes, or set lower velocities in step edit.</li>
+              <li><strong>Add ghost notes.</strong> A very quiet snare or rimshot just before the main snare adds groove without clutter.</li>
+              <li><strong>Leave space.</strong> If everything plays all the time, nothing stands out. Mute a part for a bar before a change.</li>
+              <li><strong>Tune your drums.</strong> On the Tune tab, pitch the kick and 808 to the key of your melody. 16 Levels in tune mode (<span class="cap dark">Shift</span> + <span class="cap blue">16 Levels</span>) plays one sound chromatically across all 16 pads; pad 5 is the original pitch.</li>
+              <li><strong>Layer.</strong> Two kicks on different pads (a deep one and a punchy one) recorded on the same steps hit harder than either alone.</li>
+              <li><strong>Watch the meter.</strong> Short flashes into amber are fine; red all the time means it's too loud. Lower pad levels rather than relying on the limiter.</li>
+              <li><strong>Make variations, not new beats.</strong> Double a sequence, change the second half, and build the song from small differences.</li>
+            </ul>
+            <h3>Sampling responsibly</h3>
+            <p>Sampling a commercial record for a released track usually needs permission from both the owner of the recording and the owner of the song. For music you plan to share or sell, use sounds you recorded yourself, royalty-free packs, public-domain recordings, or Creative Commons material whose licence allows your use. Most of the sound libraries in <a href="#resources">Resources</a> show the licence on every file.</p>
+          </section>
+
+          <!-- 06 -->
+          <section id="reference" aria-labelledby="h-reference">
+            <h2 class="chapter" id="h-reference"><span>06</span>Controls reference</h2>
+            <h3>Buttons</h3>
+            <div class="scroll" tabindex="0" role="region" aria-label="Buttons table">
+              <table>
+                <thead><tr><th scope="col">Button</th><th scope="col">Press</th><th scope="col">Shift + press</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="cap">Sample</span></td><td>Sample edit: Trim, Tune, Filter, Amp</td><td>Record page</td></tr>
+                  <tr><td><span class="cap">Seq</span></td><td>Sequence select; pads choose 1–16</td><td>Step edit</td></tr>
+                  <tr><td><span class="cap orange">Pad FX</span></td><td>Pads become mix effects</td><td>Toggle latch</td></tr>
+                  <tr><td><span class="cap orange">Knob FX</span></td><td>Master effects on K1–K3</td><td>Next effect tab</td></tr>
+                  <tr><td><span class="cap blue">Chop</span></td><td>Slice the selected sample across a bank</td><td>Normalize</td></tr>
+                  <tr><td><span class="cap blue">Mute</span></td><td>Pads toggle mute</td><td>Unmute all</td></tr>
+                  <tr><td><span class="cap blue">Loop</span></td><td>Loop the selected pad</td><td>Reverse it</td></tr>
+                  <tr><td><span class="cap blue">16 Levels</span></td><td>Pads play the selected pad at 16 levels</td><td>Velocity ↔ pitch</td></tr>
+                  <tr><td><span class="cap dark">Shift</span></td><td>Hold, or tap to latch for one press</td><td>—</td></tr>
+                  <tr><td><span class="cap">Pad Bank</span></td><td>Next bank (A → B → C → D)</td><td>Previous bank</td></tr>
+                  <tr><td><span class="cap">Sample Select</span></td><td>Browse the sample pool</td><td>Save the pad's sample as WAV</td></tr>
+                  <tr><td><span class="cap">Tap Tempo</span></td><td>Tap at least twice to set the tempo</td><td>Metronome on/off</td></tr>
+                  <tr><td><span class="cap">−</span> <span class="cap">+</span></td><td>Nudge the highlighted value</td><td>Undo / redo</td></tr>
+                  <tr><td><span class="cap">Sample Record</span></td><td>Open the record page, then start/stop</td><td>Load a file to the pad</td></tr>
+                  <tr><td><span class="cap">Seq Record</span></td><td>Arm recording, or punch in while playing</td><td>Clear the sequence</td></tr>
+                  <tr><td><span class="cap dark">Stop</span></td><td>Stop; press again to rewind</td><td>—</td></tr>
+                  <tr><td><span class="cap dark">Play</span></td><td>Play from the start</td><td>Continue from where you stopped</td></tr>
+                  <tr><td><span class="cap">Erase</span></td><td>Stopped: hit a pad to clear its notes. Playing: hold a pad to erase notes as they pass</td><td>Copy pad: hit the source, then the destination</td></tr>
+                  <tr><td><span class="cap">Note Repeat</span></td><td>Hold a pad to retrigger it on the grid</td><td>Triplets</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Shift + pad</h3>
+            <div class="scroll" tabindex="0" role="region" aria-label="Shift + pad table">
+              <table>
+                <thead><tr><th scope="col">Pad</th><th scope="col">Function</th><th scope="col">Pad</th><th scope="col">Function</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="cap pad">1</span></td><td>Full Level: every hit at maximum</td><td><span class="cap pad">9</span></td><td>Fader: choose what it controls</td></tr>
+                  <tr><td><span class="cap pad">2</span></td><td>Half the sequence length</td><td><span class="cap pad">10</span></td><td>Record quantize on/off</td></tr>
+                  <tr><td><span class="cap pad">3</span></td><td>Double the sequence length</td><td><span class="cap pad">11</span></td><td>Resample (record SLAB's output)</td></tr>
+                  <tr><td><span class="cap pad">4</span></td><td>Count-in on/off</td><td><span class="cap pad">12</span></td><td>Song</td></tr>
+                  <tr><td><span class="cap pad">5</span></td><td>Compressor</td><td><span class="cap pad">13</span></td><td>Trim sample</td></tr>
+                  <tr><td><span class="cap pad">6</span></td><td>Half speed (pad down an octave)</td><td><span class="cap pad">14</span></td><td>Time Correct: grid, swing, quantize</td></tr>
+                  <tr><td><span class="cap pad">7</span></td><td>Double speed (up an octave)</td><td><span class="cap pad">15</span></td><td>Warp to tempo</td></tr>
+                  <tr><td><span class="cap pad">8</span></td><td>MIDI setup</td><td><span class="cap pad">16</span></td><td>Project: save, open, bounce, install</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Display pages and their knobs</h3>
+            <div class="scroll" tabindex="0" role="region" aria-label="Display pages and their knobs table">
+              <table>
+                <thead><tr><th scope="col">Page</th><th scope="col">K1</th><th scope="col">K2</th><th scope="col">K3</th><th scope="col">Soft buttons</th></tr></thead>
+                <tbody>
+                  <tr><td>Main</td><td>Tempo</td><td>Swing</td><td>Sequence</td><td>Song, Metro, Full Lvl</td></tr>
+                  <tr><td>Sample · Trim</td><td>Start</td><td>End</td><td>Loop</td><td>Load, Reverse, Normalize, Crop, Clear</td></tr>
+                  <tr><td>Sample · Tune</td><td>Semitones</td><td>Fine (cents)</td><td>Level</td><td>—</td></tr>
+                  <tr><td>Sample · Filter</td><td>Type</td><td>Cutoff</td><td>Resonance</td><td>—</td></tr>
+                  <tr><td>Sample · Amp</td><td>Attack</td><td>Release</td><td>Pan</td><td>Hold, Choke</td></tr>
+                  <tr><td>Record</td><td>Source</td><td>—</td><td>—</td><td>Record, Discard, Load File</td></tr>
+                  <tr><td>Sequence</td><td>Bars</td><td>Swing</td><td>Tempo</td><td>Half, Double, Clear, Step Edit</td></tr>
+                  <tr><td>Step edit</td><td>Pad</td><td>Bar</td><td>Velocity</td><td>Half, Double, Clear</td></tr>
+                  <tr><td>Chop</td><td>Mode</td><td>Slices / sensitivity</td><td>Target bank</td><td>Apply</td></tr>
+                  <tr><td>Knob FX · Filter</td><td>Filter</td><td>Resonance</td><td>Drive</td><td>Reset</td></tr>
+                  <tr><td>Knob FX · Delay</td><td>Time</td><td>Feedback</td><td>Mix</td><td>Reset</td></tr>
+                  <tr><td>Knob FX · Reverb</td><td>Size</td><td>Tone</td><td>Mix</td><td>Reset</td></tr>
+                  <tr><td>Knob FX · Lo-Fi</td><td>Bits</td><td>Rate</td><td>Mix</td><td>Reset</td></tr>
+                  <tr><td>Compressor</td><td>Threshold</td><td>Ratio</td><td>Make-up gain</td><td>Enabled</td></tr>
+                  <tr><td>Time Correct</td><td>Grid</td><td>Swing</td><td>Strength</td><td>Apply, Rec Quantize</td></tr>
+                  <tr><td>Warp</td><td>Beats</td><td>Stretch / Repitch</td><td>—</td><td>Apply</td></tr>
+                  <tr><td>Song</td><td>Step</td><td>Sequence</td><td>Repeats</td><td>Add, Remove, Song Mode, Bounce</td></tr>
+                  <tr><td>MIDI</td><td>Base note</td><td>Notes play pads / keyboard</td><td>—</td><td>Connect</td></tr>
+                  <tr><td>Project</td><td>Volume</td><td>—</td><td>—</td><td>Save File, Open File, Bounce WAV, Tutorial, Guide, New, Demo</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 id="keyboard">Keyboard</h3>
+            <div class="scroll" tabindex="0" role="region" aria-label="Keyboard table">
+              <table>
+                <thead><tr><th scope="col">Keys</th><th scope="col">Action</th></tr></thead>
+                <tbody>
+                  <tr><td><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd></td><td>Pads 13–16 (top row)</td></tr>
+                  <tr><td><kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd></td><td>Pads 9–12</td></tr>
+                  <tr><td><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd></td><td>Pads 5–8</td></tr>
+                  <tr><td><kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd><kbd>V</kbd></td><td>Pads 1–4 (bottom row)</td></tr>
+                  <tr><td><kbd>Space</kbd></td><td>Play / stop</td></tr>
+                  <tr><td><kbd>Enter</kbd></td><td>Seq record</td></tr>
+                  <tr><td><kbd>Shift</kbd></td><td>SHIFT, while held</td></tr>
+                  <tr><td><kbd>←</kbd><kbd>→</kbd> · <kbd>-</kbd><kbd>=</kbd></td><td>Data wheel · − / +</td></tr>
+                  <tr><td><kbd>[</kbd><kbd>]</kbd></td><td>Previous / next tab on the display</td></tr>
+                  <tr><td><kbd>B</kbd> <kbd>T</kbd> <kbd>N</kbd></td><td>Pad bank, tap tempo, note repeat</td></tr>
+                  <tr><td><kbd>M</kbd> <kbd>L</kbd></td><td>Mute mode, 16 levels</td></tr>
+                  <tr><td><kbd>Backspace</kbd></td><td>Erase mode</td></tr>
+                  <tr><td><kbd>Esc</kbd></td><td>Back to the main page</td></tr>
+                  <tr><td><kbd>`</kbd></td><td>Swap between sampler and keyboard</td></tr>
+                  <tr><td><kbd>A</kbd>–<kbd>'</kbd> · <kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd> <kbd>O</kbd> <kbd>P</kbd></td><td>Keyboard view: white keys · black keys</td></tr>
+                  <tr><td><kbd>Z</kbd> <kbd>X</kbd></td><td>Keyboard view: octave down / up</td></tr>
+                  <tr><td><kbd>?</kbd></td><td>Shortcuts and tips</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 id="midi">MIDI controllers</h3>
+            <p>Plug in a USB MIDI keyboard or pad controller, open the MIDI page (<span class="cap dark">Shift</span> + pad 8) and press <strong>Connect</strong>. Your browser asks for permission once.</p>
+            <ul>
+              <li><strong>Notes Play</strong> chooses what notes do. <strong>Pads</strong>: notes from the base note upward (C2, note 36, by default) play pads 1–16 of the current bank. <strong>Keyboard</strong>: notes play the selected pad at pitch, like the on-screen keyboard. Most pad controllers send 36 from their first pad.</li>
+              <li>CC 1 (mod wheel), CC 74 and CC 71 turn K1, K2 and K3.</li>
+              <li>MIDI Start, Continue and Stop drive the transport, so a drum machine or DAW can start SLAB/16.</li>
+            </ul>
+            <p>Web MIDI works in Chrome, Edge, Opera and Firefox. Safari doesn't support it.</p>
+          </section>
+
+          <!-- 07 -->
+          <section id="saving" aria-labelledby="h-saving">
+            <h2 class="chapter" id="h-saving"><span>07</span>Saving and sharing</h2>
+            <ul>
+              <li><strong>Autosave.</strong> Every change is saved in this browser within a second. Close the tab and it's all there next time, as long as you use the same browser on the same device and don't clear site data. Private windows forget everything when closed.</li>
+              <li><strong>Project file.</strong> Project (<span class="cap dark">Shift</span> + pad 16) → <strong>Save File</strong> writes one <code>.slab</code> file containing your sequences, settings and every sample you loaded. Use it as a backup or to move to another computer. Open it with <strong>Open File</strong>, or drop it onto any pad.</li>
+              <li><strong>Bounce.</strong> <strong>Bounce WAV</strong> renders the current sequence, or the whole song when Song Mode is on, to a stereo WAV you can share or finish in another app. On a phone, <strong>Share</strong> sends it straight to the share sheet.</li>
+              <li><strong>Single samples.</strong> <span class="cap dark">Shift</span> + <span class="cap">Sample Select</span> saves the selected pad's sound, as trimmed, as a WAV file.</li>
+              <li><strong>Install.</strong> In Chrome and Edge, <strong>Install App</strong> on the Project page (or the install icon in the address bar) adds SLAB/16 to your dock or home screen. It then opens in its own window and works offline. In Safari, use <em>Share → Add to Home Screen</em> or <em>File → Add to Dock</em>.</li>
+            </ul>
+          </section>
+
+          <!-- 08 -->
+          <section id="troubleshooting" aria-labelledby="h-trouble">
+            <h2 class="chapter" id="h-trouble"><span>08</span>Troubleshooting</h2>
+            <dl class="faq">
+              <dt>I don't hear anything.</dt>
+              <dd>Click a pad or press <span class="cap dark">Play</span>: browsers keep audio off until you interact with the page. If the browser still holds it back, the display says so. Then play a pad and watch the level meter beside the display:
+                <ul>
+                  <li><strong>The meter moves:</strong> SLAB/16 is making sound and it's being lost on the way out. Check that the browser tab isn't muted (look for a crossed-out speaker on the tab), then check your system volume and which output device is selected.</li>
+                  <li><strong>The meter doesn't move:</strong> check the volume knob on the top panel. Then check the pad isn't muted (<span class="cap blue">Mute</span>) and has a sound.</li>
+                </ul>
+                On iPhone and iPad with iOS 16.4 or later, SLAB/16 plays even with the ring/silent switch on. On older versions, turn the switch off.</dd>
+              <dt>The meter moves but there's no sound.</dt>
+              <dd>Your browser is sending sound to a different output. Check which output device your system is using, or which one the browser is set to.</dd>
+              <dt>Playing feels late.</dt>
+              <dd>Bluetooth headphones and speakers add a noticeable delay. Use wired headphones or built-in speakers while recording. Closing other heavy tabs also helps on slower devices.</dd>
+              <dt>The microphone doesn't work.</dt>
+              <dd>The page must be served over HTTPS (or from <code>localhost</code>), and you must allow microphone access. If you blocked it, use the site settings icon in the address bar to allow it again. If no prompt ever appears, SLAB/16 is probably embedded in another page (such as a preview) that doesn't allow the microphone. Open it in its own tab. The record page tells you which of these it found.</dd>
+              <dt>Tab audio records silence.</dt>
+              <dd>In the browser's share dialog, choose a <em>tab</em> rather than a window or screen, and turn on <em>Share tab audio</em>. System-wide audio capture depends on your browser and operating system.</dd>
+              <dt>A file won't load.</dt>
+              <dd>Your browser can't decode that format. Convert it to WAV with a free editor such as Audacity and try again.</dd>
+              <dt>My MIDI controller isn't found.</dt>
+              <dd>Connect it before pressing <strong>Connect</strong>, and use Chrome, Edge or Firefox. If you denied permission, allow MIDI in the site settings and reload.</dd>
+              <dt>My project is gone.</dt>
+              <dd>Autosave is per browser and per device, and is erased when site data is cleared. Save a <code>.slab</code> file after any session you care about.</dd>
+              <dt>Pads keep playing after I let go.</dt>
+              <dd>The pad is set to loop. A looping pad keeps going until you hit it again. Turn off <span class="cap blue">Loop</span> for that pad, or press <span class="cap dark">Stop</span> to silence everything.</dd>
+            </dl>
+          </section>
+
+          <!-- 09 -->
+          <section id="resources" aria-labelledby="h-resources">
+            <h2 class="chapter" id="h-resources"><span>09</span>Resources</h2>
+            <p class="lede">Hand-picked places to learn and to find sounds. All free unless marked otherwise.</p>
+
+            <h3>Learn music and production</h3>
+            <ul class="res">
+              <li><a href="https://learningmusic.ableton.com/">Learning Music</a><span class="tag">interactive</span><p>Beats, notes, chords and song structure, taught hands-on in the browser. The best first stop if you're new.</p></li>
+              <li><a href="https://learningsynths.ableton.com/">Learning Synths</a><span class="tag">interactive</span><p>How filters, envelopes and oscillators shape sound. The same ideas behind the Sample page's Filter and Amp tabs.</p></li>
+              <li><a href="https://musiclab.chromeexperiments.com/">Chrome Music Lab</a><span class="tag">interactive</span><p>Playful experiments with rhythm, melody and harmony. Good for kids and for building intuition.</p></li>
+              <li><a href="https://www.musictheory.net/">musictheory.net</a><p>Short lessons and drills for reading rhythm, scales, chords and ear training.</p></li>
+              <li><a href="https://www.hooktheory.com/">Hooktheory</a><span class="tag">some paid</span><p>The chord progressions behind thousands of songs, for writing melodies and basslines over your beats.</p></li>
+              <li><a href="https://shittyrecording.studio/">Pocket Operations</a><span class="tag">PDF</span><p>A free book of classic drum patterns in a 16-step grid, ready to enter in step edit.</p></li>
+              <li><a href="https://www.attackmagazine.com/technique/beat-dissected/">Beat Dissected, Attack Magazine</a><p>Drum patterns from electronic music styles, broken down step by step.</p></li>
+              <li><a href="https://www.soundonsound.com/">Sound On Sound</a><span class="tag">some paid</span><p>Long-running magazine with in-depth technique articles on recording, sampling and mixing.</p></li>
+              <li><a href="https://www.edmprod.com/">EDMProd</a><span class="tag">some paid</span><p>Practical articles on arrangement, sound design and finishing tracks.</p></li>
+            </ul>
+
+            <h3>Find sounds to sample</h3>
+            <ul class="res">
+              <li><a href="https://freesound.org/">Freesound</a><span class="tag">CC licences</span><p>Hundreds of thousands of recordings uploaded by users. Each file shows its licence; filter for CC0 to use sounds without attribution.</p></li>
+              <li><a href="https://www.looperman.com/">Looperman</a><p>Free loops and one-shots from other producers, in many genres. Read the site's terms before releasing music with them.</p></li>
+              <li><a href="https://99sounds.org/">99Sounds</a><p>Free, royalty-free sample packs: drums, textures and field recordings.</p></li>
+              <li><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound Effects</a><span class="tag">licence limits</span><p>Thousands of archive effects and ambiences. Free for personal, educational and research use; check the licence before releasing anything.</p></li>
+              <li><a href="https://archive.org/details/georgeblood">The Great 78 Project</a><p>Digitised 78 rpm records from the Internet Archive: early jazz, blues and more, with all the crackle. Check each recording's rights status.</p></li>
+              <li><a href="https://musopen.org/">Musopen</a><p>Public-domain and freely licensed classical recordings and scores.</p></li>
+              <li><a href="https://freemusicarchive.org/">Free Music Archive</a><span class="tag">CC licences</span><p>Independent music under Creative Commons. The licence is on each track; some forbid commercial use or changes.</p></li>
+              <li><a href="https://splice.com/">Splice</a><span class="tag">paid</span><p>A large subscription library of cleared, royalty-free samples you can use in released music.</p></li>
+            </ul>
+
+            <h3>Tools that pair well</h3>
+            <ul class="res">
+              <li><a href="https://www.audacityteam.org/">Audacity</a><span class="tag">desktop</span><p>Free audio editor: convert files to WAV, clean up recordings, or edit a bounce.</p></li>
+              <li><a href="https://www.bandlab.com/">BandLab</a><span class="tag">web, mobile</span><p>Free online studio. Import your bounced WAVs to add vocals and instruments, and mix a full track.</p></li>
+              <li><a href="https://www.whosampled.com/">WhoSampled</a><p>Look up which records a song sampled, and which songs sampled it. Great for learning how producers flip a sample.</p></li>
+              <li><a href="https://creativecommons.org/licenses/">Creative Commons licences</a><p>A plain-language guide to what each CC licence on a sample allows.</p></li>
+            </ul>
+
+            <h3>For developers</h3>
+            <ul class="res">
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API on MDN</a><p>The browser audio engine SLAB/16 is built on.</p></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API">Web MIDI API on MDN</a><p>How browsers talk to MIDI controllers.</p></li>
+            </ul>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>SLAB/16 is an independent project. External sites are run by their owners; check each site's licence terms before you release music made with their sounds. <a href="./">Back to SLAB/16</a></p>
+    </footer>
+  </body>
+</html>
