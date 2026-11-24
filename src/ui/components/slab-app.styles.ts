@@ -13,7 +13,8 @@ export const appStyles = sheet(css`
   }
   .device {
     /* 1u = 1% of the device width. --u is registered as a <length> in app.css. */
-    --dw: min(100cqi, max(36rem, calc((100dvh - 2rem) * 0.752)));
+    /* --slab-chrome-block: height of the nav row when it sits above the instrument (portrait). */
+    --dw: min(100cqi, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block, 0px)) * 0.752)));
     --u: calc(var(--dw) / 100);
     inline-size: var(--dw);
     margin-inline: auto;
@@ -65,22 +66,25 @@ export const appStyles = sheet(css`
     --slab-knob-ring: #3a3a3f;
     --slab-knob-ink: #c9c7bf;
   }
-  .brand { grid-area: brand; display: grid; gap: calc(var(--u) * 0.3); min-inline-size: 0; }
+  /* The brand is its own container so the wordmark and tagline are sized to fit their column. */
+  .brand { grid-area: brand; display: grid; gap: calc(var(--u) * 0.3); min-inline-size: 0; container-type: inline-size; }
   .wordmark {
     margin: 0;
-    font-size: max(1rem, calc(var(--u) * 3.6));
+    font-size: min(max(1rem, calc(var(--u) * 3.6)), 20.5cqi);
     font-weight: 800;
     letter-spacing: 0.06em;
     line-height: 1;
   }
   .wordmark b { color: var(--slab-screen-accent, #f5c542); font-weight: 800; }
+  /* One line where it fits; at the 8px legibility floor it wraps to two rather than clipping. */
   .tag {
-    font-size: max(0.5rem, calc(var(--u) * 1.15));
+    font-size: max(0.5rem, min(calc(var(--u) * 1.15), 6.6cqi));
     font-weight: 700;
     letter-spacing: 0.14em;
+    line-height: 1.25;
     text-transform: uppercase;
+    text-wrap: balance;
     color: #8d8c86;
-    white-space: nowrap;
   }
   #volume { grid-area: volume; align-self: center; --slab-knob-size: calc(var(--u) * 9.5); }
   .banks {

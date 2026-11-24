@@ -14,6 +14,10 @@
 :root {
   color-scheme: dark;
 
+  /* Layout: height of the nav row above the instrument (portrait only) and width of the side rail (landscape only). */
+  --slab-chrome-block: 0px;
+  --slab-rail: 0px;
+
   /* Surfaces */
   --slab-desk: #161514;
   --slab-desk-hi: #24221f;
@@ -79,15 +83,26 @@ body {
   overscroll-behavior: none;
 }
 
-/* View switch and help buttons above the instrument: quiet so the faceplate stays the focus. */
+/*
+ * View switch and help buttons. Quiet so the faceplate stays the focus.
+ * Portrait: a row above the instrument, spread edge to edge across its width.
+ * Landscape: a vertical rail fixed to the right edge, with matching space reserved.
+ */
 .chrome {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 4px;
-  inline-size: min(100%, 76rem);
+  /* Same width as the faceplate (see --dw in slab-app.styles.ts), so the row lines up with its edges. */
+  inline-size: min(100%, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block)) * 0.752)));
   margin: 0 auto 8px;
+}
+/* In keyboard view the row matches the keyboard's width instead (it's wider than the faceplate). */
+@media (orientation: portrait) {
+  body:has(> slab-keys:not([hidden])) .chrome {
+    inline-size: min(100%, 76rem);
+  }
 }
 .chrome a,
 .chrome button {
@@ -125,15 +140,6 @@ body {
 @media (pointer: coarse) {
   .chrome a,
   .chrome button { min-block-size: 44px; }
-}
-/* With desk space beside the faceplate, float the links in the corner so the instrument keeps its full height. */
-@media (min-width: 62rem) {
-  .chrome {
-    position: fixed;
-    inset: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) auto auto;
-    inline-size: auto;
-    margin: 0;
-  }
 }
 
 /* Sampler | Keyboard switch: the one control here that changes what's on screen, so it reads as a toggle. */
@@ -176,9 +182,35 @@ body {
   .chrome .icon { inline-size: 44px; }
 }
 slab-keys { align-self: center; }
-/* Leave the desk corner for the floating links (see .chrome above). */
-@media (min-width: 62rem) {
-  slab-keys { inline-size: min(76rem, 100vw - 28rem); }
+
+/* Portrait: the row above takes this much height, so the faceplate shrinks to keep fitting the screen. */
+@media (orientation: portrait) {
+  :root { --slab-chrome-block: 3.5rem; }
+}
+
+/* Landscape: a rail on the right. Both sides reserve its width so the instrument stays centred and clear of it. */
+@media (orientation: landscape) {
+  :root { --slab-rail: 52px; }
+  body {
+    padding-inline:
+      calc(max(0.75rem, env(safe-area-inset-left, 0px)) + var(--slab-rail))
+      calc(max(0.75rem, env(safe-area-inset-right, 0px)) + var(--slab-rail));
+  }
+  .chrome {
+    position: fixed;
+    inset: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) auto auto;
+    z-index: 5;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 6px;
+    inline-size: auto;
+    margin: 0;
+  }
+  .chrome .switch { flex-direction: column; }
+}
+@media (orientation: landscape) and (pointer: coarse) {
+  :root { --slab-rail: 60px; }
 }
 
 slab-app:not(:defined) {
