@@ -23,6 +23,16 @@ if (keys instanceof SlabKeys) {
 }
 bindKeyboard(app, controller, keys instanceof SlabKeys ? keys : null);
 
+// Hand over from the boot loader in index.html once the instrument has painted.
+requestAnimationFrame(() => {
+  document.documentElement.classList.add('ready');
+  const boot = document.querySelector('.boot');
+  if (!boot) return;
+  const remove = (): void => boot.remove();
+  boot.addEventListener('transitionend', remove, { once: true });
+  setTimeout(remove, 800); // in case no transition runs (reduced motion, hidden tab)
+});
+
 // Browsers only allow audio after a gesture. Desktop browsers accept a press; iOS only
 // accepts the end of a tap. Keep listening until audio is actually running.
 const UNLOCK_EVENTS = ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'] as const;

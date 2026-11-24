@@ -29,6 +29,9 @@
   --slab-pad: #8c8e95;
   --slab-pad-frame: #191b2a;
   --slab-strip: #9b9c9e;
+  /* Hint strip under the pads: a backlit LCD. */
+  --slab-lcd-bg: #040705;
+  --slab-lcd-fg: #5ff08a;
 
   /* Ink */
   --slab-ink: #2a2a2c;
@@ -73,7 +76,8 @@ body {
   margin: 0;
   min-block-size: 100%;
   display: grid;
-  align-content: center;
+  /* Top-aligned, so the icons and the instrument stay put when switching between sampler and keyboard. */
+  align-content: start;
   padding-block: max(1rem, env(safe-area-inset-top, 0px)) max(1rem, env(safe-area-inset-bottom, 0px));
   padding-inline: max(0.75rem, env(safe-area-inset-left, 0px)) max(0.75rem, env(safe-area-inset-right, 0px));
   background: radial-gradient(120% 90% at 50% 0%, var(--slab-desk-hi), var(--slab-desk) 70%) fixed;
@@ -85,17 +89,17 @@ body {
 
 /*
  * View switch and help buttons. Quiet so the faceplate stays the focus.
- * Portrait: a row above the instrument, spread edge to edge across its width.
+ * Portrait: a row above the instrument, the icons centred as one group.
  * Landscape: a vertical rail fixed to the right edge, with matching space reserved.
  */
 .chrome {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 4px;
+  justify-content: center;
+  gap: 12px;
   /* Same width as the faceplate (see --dw in slab-app.styles.ts), so the row lines up with its edges. */
-  inline-size: min(100%, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block)) * 0.752)));
+  inline-size: min(100%, 1000px, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block)) * 0.752)));
   margin: 0 auto 8px;
 }
 /* In keyboard view the row matches the keyboard's width instead (it's wider than the faceplate). */
@@ -211,6 +215,82 @@ slab-keys { align-self: center; }
 }
 @media (orientation: landscape) and (pointer: coarse) {
   :root { --slab-rail: 60px; }
+}
+
+/* ---- Boot loader (markup in index.html, removed by main.ts once the instrument is ready) ---- */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: radial-gradient(120% 90% at 50% 0%, var(--slab-desk-hi), var(--slab-desk) 70%);
+  text-align: center;
+  transition: opacity 320ms ease, visibility 0s linear 320ms;
+}
+html.ready .boot {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* never swallow the first tap while fading out */
+}
+/* The icons do nothing until the app has started, so keep them out of sight (and out of reach) until then. */
+html:not(.ready) .chrome {
+  visibility: hidden;
+}
+.boot p { margin: 0; }
+.boot-mark {
+  font: 800 2rem/1 var(--slab-font-label);
+  letter-spacing: 0.06em;
+  color: var(--slab-body-hi);
+}
+.boot-mark b { color: var(--slab-screen-accent); font-weight: 800; }
+.boot-pads {
+  display: grid;
+  grid-template-columns: repeat(4, 18px);
+  gap: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--slab-pad-frame);
+}
+.boot-pads i {
+  block-size: 18px;
+  border-radius: 4px;
+  background: #3b3e4a;
+  animation: boot-pad 1.4s ease-in-out infinite;
+}
+/* A diagonal sweep from pad 13 (top-left) to pad 4 (bottom-right), like a sequencer running. */
+.boot-pads i:nth-child(2), .boot-pads i:nth-child(5) { animation-delay: 90ms; }
+.boot-pads i:nth-child(3), .boot-pads i:nth-child(6), .boot-pads i:nth-child(9) { animation-delay: 180ms; }
+.boot-pads i:nth-child(4), .boot-pads i:nth-child(7), .boot-pads i:nth-child(10), .boot-pads i:nth-child(13) { animation-delay: 270ms; }
+.boot-pads i:nth-child(8), .boot-pads i:nth-child(11), .boot-pads i:nth-child(14) { animation-delay: 360ms; }
+.boot-pads i:nth-child(12), .boot-pads i:nth-child(15) { animation-delay: 450ms; }
+.boot-pads i:nth-child(16) { animation-delay: 540ms; }
+@keyframes boot-pad {
+  0%, 45%, 100% { background: #3b3e4a; box-shadow: none; }
+  15% { background: var(--slab-led-blue); box-shadow: 0 0 10px rgb(79 125 255 / 0.7); }
+}
+.boot-text {
+  font: 0.8125rem/1.4 var(--slab-font-screen);
+  letter-spacing: 0.04em;
+  color: #a8a59c;
+}
+/* Only shows if loading stalls (bad connection, blocked script). */
+.boot-slow {
+  max-inline-size: 28ch;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #a8a59c;
+  opacity: 0;
+  animation: boot-reveal 400ms ease 12s forwards;
+}
+@keyframes boot-reveal { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .boot { transition: visibility 0s linear 0s; }
+  .boot-pads i { animation: none; }
+  .boot-pads i:nth-child(1), .boot-pads i:nth-child(6), .boot-pads i:nth-child(11), .boot-pads i:nth-child(16) { background: var(--slab-led-blue); }
 }
 
 slab-app:not(:defined) {

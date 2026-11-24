@@ -14,7 +14,8 @@ export const appStyles = sheet(css`
   .device {
     /* 1u = 1% of the device width. --u is registered as a <length> in app.css. */
     /* --slab-chrome-block: height of the nav row when it sits above the instrument (portrait). */
-    --dw: min(100cqi, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block, 0px)) * 0.752)));
+    /* Never wider than 1000px; everything inside scales from --dw, so the board shrinks as a whole. */
+    --dw: min(100cqi, 1000px, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block, 0px)) * 0.752)));
     --u: calc(var(--dw) / 100);
     inline-size: var(--dw);
     margin-inline: auto;
@@ -172,25 +173,48 @@ export const appStyles = sheet(css`
   .legend span { color: #a4a6b4; overflow: hidden; text-overflow: ellipsis; }
   .device[data-shift] .legend span { color: var(--slab-led-amber, #ffb02e); }
 
+  /* Hint strip: a backlit LCD sunk into the faceplate. Green phosphor text, faint scanlines, a blinking cursor. */
   .strip {
     grid-area: strip;
     display: grid;
     align-items: center;
     min-block-size: calc(var(--u) * 5.5);
     margin-block-start: calc(var(--u) * 1.2);
-    padding: calc(var(--u) * 0.8) calc(var(--u) * 2);
+    padding: calc(var(--u) * 0.9) calc(var(--u) * 2);
     border-radius: calc(var(--u) * 1.2);
-    background: var(--slab-strip, #9b9c9e);
-    box-shadow: inset 0 calc(var(--u) * 0.2) calc(var(--u) * 0.5) rgb(0 0 0 / 0.25);
+    background:
+      repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.025) 0 1px, transparent 1px 3px),
+      radial-gradient(120% 140% at 50% 0%, color-mix(in srgb, var(--slab-lcd-fg, #5ff08a) 7%, var(--slab-lcd-bg, #040705)), var(--slab-lcd-bg, #040705) 70%);
+    box-shadow:
+      0 0 0 calc(var(--u) * 0.35) #1b1c1f,
+      inset 0 calc(var(--u) * 0.3) calc(var(--u) * 0.9) rgb(0 0 0 / 0.8);
   }
   .strip p {
     margin: 0;
-    font-size: max(0.6875rem, calc(var(--u) * 1.45));
-    font-weight: 600;
-    line-height: 1.25;
-    color: #17171a;
+    font-family: var(--slab-font-screen, ui-monospace, 'SF Mono', Menlo, Consolas, monospace);
+    font-size: max(0.6875rem, calc(var(--u) * 1.4));
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    color: var(--slab-lcd-fg, #5ff08a);
+    text-shadow: 0 0 calc(var(--u) * 0.6) color-mix(in srgb, var(--slab-lcd-fg, #5ff08a) 55%, transparent);
     text-wrap: balance;
     text-align: center;
+  }
+  .strip p::after {
+    content: '';
+    display: inline-block;
+    inline-size: 0.55em;
+    block-size: 1em;
+    margin-inline-start: 0.35em;
+    vertical-align: -0.15em;
+    background: currentColor;
+    box-shadow: 0 0 calc(var(--u) * 0.6) color-mix(in srgb, var(--slab-lcd-fg, #5ff08a) 55%, transparent);
+    animation: cursor 1.06s steps(1) infinite;
+  }
+  @keyframes cursor { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .strip p::after { animation: none; }
   }
 
   /* Guided-tour highlight: only present while the tour points at a control. */
