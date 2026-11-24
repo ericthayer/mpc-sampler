@@ -68,7 +68,14 @@ export const appStyles = sheet(css`
     --slab-knob-ink: #c9c7bf;
   }
   /* The brand is its own container so the wordmark and tagline are sized to fit their column. */
-  .brand { grid-area: brand; display: grid; gap: calc(var(--u) * 0.3); min-inline-size: 0; container-type: inline-size; }
+  .brand { grid-area: brand; min-inline-size: 0; container-type: inline-size; }
+  /* Wordmark + tagline: the lockup is as wide as the wordmark, and the tagline stretches to match it. */
+  .lockup {
+    display: grid;
+    gap: calc(var(--u) * 0.45);
+    inline-size: fit-content;
+    max-inline-size: 100%;
+  }
   .wordmark {
     margin: 0;
     font-size: min(max(1rem, calc(var(--u) * 3.6)), 20.5cqi);
@@ -77,15 +84,19 @@ export const appStyles = sheet(css`
     line-height: 1;
   }
   .wordmark b { color: var(--slab-screen-accent, #f5c542); font-weight: 800; }
-  /* One line where it fits; at the 8px legibility floor it wraps to two rather than clipping. */
+  /* Always one line, justified to the wordmark's width (SVG textLength). Zero width + min 100%: it fills the lockup without widening it. */
   .tag {
-    font-size: max(0.5rem, min(calc(var(--u) * 1.15), 6.6cqi));
+    display: block;
+    inline-size: 0;
+    min-inline-size: 100%;
+    block-size: auto;
+    overflow: visible;
+  }
+  .tag text {
+    font-family: var(--slab-font-label, 'Helvetica Neue', Helvetica, Arial, sans-serif);
+    font-size: 15px; /* viewBox units (of 200): letters fill ~90% of the width before justification */
     font-weight: 700;
-    letter-spacing: 0.14em;
-    line-height: 1.25;
-    text-transform: uppercase;
-    text-wrap: balance;
-    color: #8d8c86;
+    fill: #8d8c86;
   }
   #volume { grid-area: volume; align-self: center; --slab-knob-size: calc(var(--u) * 9.5); }
   .banks {

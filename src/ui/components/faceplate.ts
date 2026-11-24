@@ -47,6 +47,28 @@ export function button(spec: ButtonSpec): SlabButton {
   return h('slab-button', { id: spec.id, label: spec.label, sub: spec.sub, tone: spec.tone, led: spec.led, toggle: spec.toggle }) as SlabButton;
 }
 
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+/**
+ * The tagline under the wordmark, as SVG text: `textLength` spaces the letters so the
+ * line exactly fills its width (the wordmark's) and it can never wrap.
+ */
+export function tagline(text: string): SVGSVGElement {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('class', 'tag');
+  svg.setAttribute('viewBox', '0 0 200 11'); // tight to the capital letters: no descenders
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', text);
+  const line = document.createElementNS(SVG_NS, 'text');
+  line.setAttribute('x', '0');
+  line.setAttribute('y', '10.8');
+  line.setAttribute('textLength', '200');
+  line.setAttribute('lengthAdjust', 'spacing');
+  line.textContent = text.toUpperCase();
+  svg.append(line);
+  return svg;
+}
+
 /** One-line explanation of the active pad mode, shown on the strip under the pads. */
 export function modeHint(app: App): string {
   const ui = app.ui.state;
