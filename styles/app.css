@@ -29,6 +29,9 @@
   --slab-pad: #8c8e95;
   --slab-pad-frame: #191b2a;
   --slab-strip: #9b9c9e;
+  /* Hint strip under the pads: a backlit LCD. */
+  --slab-lcd-bg: #040705;
+  --slab-lcd-fg: #5ff08a;
 
   /* Ink */
   --slab-ink: #2a2a2c;
