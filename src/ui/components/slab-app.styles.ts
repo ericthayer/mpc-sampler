@@ -14,7 +14,8 @@ export const appStyles = sheet(css`
   .device {
     /* 1u = 1% of the device width. --u is registered as a <length> in app.css. */
     /* --slab-chrome-block: height of the nav row when it sits above the instrument (portrait). */
-    --dw: min(100cqi, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block, 0px)) * 0.752)));
+    /* Never wider than 1000px; everything inside scales from --dw, so the board shrinks as a whole. */
+    --dw: min(100cqi, 1000px, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block, 0px)) * 0.752)));
     --u: calc(var(--dw) / 100);
     inline-size: var(--dw);
     margin-inline: auto;

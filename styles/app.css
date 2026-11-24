@@ -86,17 +86,17 @@ body {
 
 /*
  * View switch and help buttons. Quiet so the faceplate stays the focus.
- * Portrait: a row above the instrument, spread edge to edge across its width.
+ * Portrait: a row above the instrument, the icons centred as one group.
  * Landscape: a vertical rail fixed to the right edge, with matching space reserved.
  */
 .chrome {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 4px;
+  justify-content: center;
+  gap: 12px;
   /* Same width as the faceplate (see --dw in slab-app.styles.ts), so the row lines up with its edges. */
-  inline-size: min(100%, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block)) * 0.752)));
+  inline-size: min(100%, 1000px, max(36rem, calc((100dvh - 2rem - var(--slab-chrome-block)) * 0.752)));
   margin: 0 auto 8px;
 }
 /* In keyboard view the row matches the keyboard's width instead (it's wider than the faceplate). */
@@ -187,13 +187,6 @@ slab-keys { align-self: center; }
 /* Portrait: the row above takes this much height, so the faceplate shrinks to keep fitting the screen. */
 @media (orientation: portrait) {
   :root { --slab-chrome-block: 3.5rem; }
-}
-/* Phones in portrait (the handheld faceplate): centre the icons as one group, with room between them. */
-@media (orientation: portrait) and (max-width: 37.5rem) {
-  .chrome {
-    justify-content: center;
-    gap: 12px;
-  }
 }
 
 /* Landscape: a rail on the right. Both sides reserve its width so the instrument stays centred and clear of it. */
