@@ -9,7 +9,7 @@ import type { PadLight } from '../screen/page.js';
 import { faderTargetLabel } from '../screen/pages/system.js';
 import { sharedStyles } from '../styles/shared.js';
 import { appStyles } from './slab-app.styles.js';
-import { button, modeHint, MODE_BUTTONS, PLAY_BUTTONS, TRANSPORT_BUTTONS, UTILITY_BUTTONS, type ButtonSpec } from './faceplate.js';
+import { button, modeHint, tagline, MODE_BUTTONS, PLAY_BUTTONS, TRANSPORT_BUTTONS, UTILITY_BUTTONS, type ButtonSpec } from './faceplate.js';
 import type { SlabButton } from './slab-button.js';
 import { SlabFader, type FaderInputDetail } from './slab-fader.js';
 import { SlabKnob, type KnobInputDetail, type KnobTurnDetail } from './slab-knob.js';
@@ -80,7 +80,7 @@ export class SlabApp extends SlabElement {
     const top = h(
       'section',
       { class: 'top', 'aria-label': 'Display and output' },
-      h('div', { class: 'brand' }, h('h1', { class: 'wordmark' }, 'SLAB', h('b', null, '/16')), h('span', { class: 'tag' }, 'Sampling groovebox')),
+      h('div', { class: 'brand' }, h('div', { class: 'lockup' }, h('h1', { class: 'wordmark' }, 'SLAB', h('b', null, '/16')), tagline('Sampling groovebox'))),
       this.#volume,
       h('ul', { class: 'banks', 'aria-label': 'Pad bank' }, ...this.#banks),
       this.#screen,
