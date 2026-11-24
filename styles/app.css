@@ -187,6 +187,13 @@ slab-keys { align-self: center; }
 @media (orientation: portrait) {
   :root { --slab-chrome-block: 3.5rem; }
 }
+/* Phones in portrait (the handheld faceplate): centre the icons as one group, with room between them. */
+@media (orientation: portrait) and (max-width: 37.5rem) {
+  .chrome {
+    justify-content: center;
+    gap: 12px;
+  }
+}
 
 /* Landscape: a rail on the right. Both sides reserve its width so the instrument stays centred and clear of it. */
 @media (orientation: landscape) {
