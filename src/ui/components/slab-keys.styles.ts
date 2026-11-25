@@ -137,19 +137,13 @@ export const keysStyles = sheet(css`
   .key.root .name { color: var(--slab-shift-ink, #a8380f); }
   :focus-visible { outline: 3px solid var(--slab-focus, #ffd24a); outline-offset: 2px; }
 
+  /* Instructions: the same backlit LCD as the faceplate's hint strip (styles/lcd.ts). */
   .hint {
-    margin: 0;
-    font-size: 0.8125rem;
-    line-height: 1.4;
-    color: #5a5853;
-    text-wrap: pretty;
+    padding: calc(var(--u) * 1.6) calc(var(--u) * 2.5);
   }
-  .hint kbd {
-    padding: 0 4px;
-    border: 1px solid #a9a391;
-    border-bottom-width: 2px;
-    border-radius: 3px;
-    font: 600 0.75rem/1.4 var(--slab-font-screen, monospace);
+  .hint p {
+    font-size: 0.8125rem;
+    line-height: 1.75; /* room for the keycaps between lines */
   }
   @container keys (inline-size < 40rem) {
     .sound { margin-inline-start: 0; inline-size: 100%; }

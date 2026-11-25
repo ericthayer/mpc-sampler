@@ -6,6 +6,7 @@ import { pad2 } from '../../core/util.js';
 import { position } from '../../seq/timing.js';
 import { define, h, SlabElement } from '../dom.js';
 import { clampLow, noteName, soundOptions } from '../keys/keymap.js';
+import { lcdStyles } from '../styles/lcd.js';
 import { sharedStyles } from '../styles/shared.js';
 import './slab-button.js';
 import type { SlabButton } from './slab-button.js';
@@ -35,7 +36,7 @@ export class SlabKeys extends SlabElement {
   #raf = 0;
 
   constructor() {
-    super([sharedStyles, keysStyles], false);
+    super([sharedStyles, lcdStyles, keysStyles], false);
   }
 
   bind(app: App, controller: Controller): void {
@@ -87,7 +88,7 @@ export class SlabKeys extends SlabElement {
         this.#status,
       ),
       this.#bed,
-      h('p', { class: 'hint' }, 'Computer keys: ', h('kbd', null, 'A'), '–', h('kbd', null, "'"), ' white keys, ', h('kbd', null, 'W'), ' ', h('kbd', null, 'E'), ' ', h('kbd', null, 'T'), ' ', h('kbd', null, 'Y'), ' ', h('kbd', null, 'U'), ' ', h('kbd', null, 'O'), ' ', h('kbd', null, 'P'), ' black keys, ', h('kbd', null, 'Z'), ' / ', h('kbd', null, 'X'), ' octave. ', h('kbd', null, 'Space'), ' plays, ', h('kbd', null, 'Enter'), ' records, ', h('kbd', null, '`'), ' switches back to the sampler.'),
+      h('div', { class: 'hint lcd' }, h('p', null, 'Computer keys: ', h('span', { class: 'nobr' }, h('kbd', null, 'A'), '–', h('kbd', null, "'")), ' white keys, ', h('kbd', null, 'W'), ' ', h('kbd', null, 'E'), ' ', h('kbd', null, 'T'), ' ', h('kbd', null, 'Y'), ' ', h('kbd', null, 'U'), ' ', h('kbd', null, 'O'), ' ', h('kbd', null, 'P'), ' black keys, ', h('span', { class: 'nobr' }, h('kbd', null, 'Z'), ' / ', h('kbd', null, 'X')), ' octave. ', h('kbd', null, 'Space'), ' plays, ', h('kbd', null, 'Enter'), ' records, ', h('kbd', null, '`'), ' switches back to the sampler.')),
     );
     this.root.append(unit);
 

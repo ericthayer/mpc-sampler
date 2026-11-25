@@ -7,6 +7,7 @@ import { BANK_NAMES, PADS_PER_BANK } from '../../core/types.js';
 import { define, h, SlabElement } from '../dom.js';
 import type { PadLight } from '../screen/page.js';
 import { faderTargetLabel } from '../screen/pages/system.js';
+import { lcdStyles } from '../styles/lcd.js';
 import { sharedStyles } from '../styles/shared.js';
 import { appStyles } from './slab-app.styles.js';
 import { button, modeHint, tagline, MODE_BUTTONS, PLAY_BUTTONS, TRANSPORT_BUTTONS, UTILITY_BUTTONS, type ButtonSpec } from './faceplate.js';
@@ -39,7 +40,7 @@ export class SlabApp extends SlabElement {
   #raf = 0;
 
   constructor() {
-    super([sharedStyles, appStyles], false);
+    super([sharedStyles, lcdStyles, appStyles], false);
   }
 
   /** Attach the runtime. Call once, before the element is used. */
@@ -112,7 +113,7 @@ export class SlabApp extends SlabElement {
       h('section', { class: 'group', 'aria-label': 'Utility' }, ...utility.slice(0, 2), this.#fader, ...utility.slice(2)),
       h('section', { class: 'pads', id: 'pads', 'aria-label': 'Pads' }, ...padCells),
       h('section', { class: 'group', 'aria-label': 'Data and transport' }, this.#wheel, ...add(TRANSPORT_BUTTONS)),
-      h('footer', { class: 'strip' }, this.#hint),
+      h('footer', { class: 'strip lcd' }, this.#hint),
     );
     this.root.append(this.#device);
   }
